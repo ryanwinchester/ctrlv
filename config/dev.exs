@@ -25,6 +25,7 @@ config :ctrlv, CtrlvWeb.Endpoint,
   secret_key_base: "+mQ8PbhYmR0BbmiBJ2n0qbrtTvTvvLHRIXzEND/Q1PxE+zXcdTbfz+dPQGeV+D3G",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]},
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
   ]
 

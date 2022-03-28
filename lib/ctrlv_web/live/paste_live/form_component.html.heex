@@ -1,0 +1,28 @@
+<div>
+  <h2><%= @title %></h2>
+
+  <.form
+    let={f}
+    for={@changeset}
+    id="paste-form"
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save">
+  
+    <%= label f, :puid %>
+    <%= text_input f, :puid %>
+    <%= error_tag f, :puid %>
+  
+    <%= label f, :content %>
+    <%= text_input f, :content %>
+    <%= error_tag f, :content %>
+  
+    <%= label f, :expires_at %>
+    <%= datetime_select f, :expires_at %>
+    <%= error_tag f, :expires_at %>
+  
+    <div>
+      <%= submit "Save", phx_disable_with: "Saving..." %>
+    </div>
+  </.form>
+</div>
