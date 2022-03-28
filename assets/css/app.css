@@ -2,6 +2,20 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.cm-editor {
-  height: 100vh;
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  min-height: 2.2em;
+  min-width: 2.2em;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: var(--rounded-btn,.5rem);
+  border-bottom-width: 2px;
+  line-height: 1.5rem;
+  font-size: 1rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }

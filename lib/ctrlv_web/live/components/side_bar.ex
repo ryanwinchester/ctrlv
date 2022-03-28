@@ -50,7 +50,11 @@ defmodule CtrlvWeb.SideBarComponent do
           </div>
 
           <div class="flex-shrink-0 flex items-center px-4">
-            <span class="logo text-white text-2xl font-bold leading-7">ctrlv.io</span>
+            <span class="text-white text-2xl font-bold leading-7">
+              <span class="kbd border border-neutral-focus border-opacity-20 bg-base-200 px-2 rounded-btn">ctrl</span>
+              <span class="kbd border border-neutral-focus border-opacity-20 bg-base-200 px-2 rounded-btn">v</span>
+              <span class="kbd border border-neutral-focus border-opacity-20 bg-black px-2 rounded-btn">.io</span>
+            </span>
           </div>
           <nav class="mt-5 flex-shrink-0 h-full divide-y divide-gray-800 overflow-y-auto" aria-label="Sidebar">
             <div class="px-2 space-y-1">
@@ -112,7 +116,11 @@ defmodule CtrlvWeb.SideBarComponent do
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex flex-col flex-grow bg-gray-700 pt-5 pb-4 overflow-y-auto">
           <div class="flex items-center flex-shrink-0 px-4">
-            <span class="logo text-white text-2xl font-bold leading-7">ctrlv.io</span>
+          <span class="text-white text-2xl font-bold leading-7">
+            <span class="kbd border border-neutral-focus border-opacity-20 bg-black px-2 rounded-btn">ctrl</span>
+            <span class="kbd border border-neutral-focus border-opacity-20 bg-black px-2 rounded-btn">v</span>
+            <span class="kbd border border-neutral-focus border-opacity-20 bg-black px-2 rounded-btn">.io</span>
+          </span>
           </div>
           <nav class="mt-5 flex-1 flex flex-col divide-y divide-gray-800 overflow-y-auto" aria-label="Sidebar">
             <div class="px-2 space-y-1">
