@@ -1,7 +1,5 @@
 {
   "dependencies": {
-    "@codemirror/basic-setup": "^0.19.1",
-    "@codemirror/lang-javascript": "^0.19.7",
-    "@codemirror/theme-one-dark": "^0.19.1"
+    "monaco-editor": "^0.33.0"
   }
 }
