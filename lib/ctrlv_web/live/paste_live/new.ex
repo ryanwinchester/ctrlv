@@ -5,6 +5,7 @@ defmodule CtrlvWeb.PasteLive.New do
   def mount(_params, _session, socket) do
     {:ok,
       socket
-      |> assign(:page_title, "New Paste")}
+      |> assign(:page_title, "New Paste")
+      |> assign(:is_editing, true)}
   end
 end

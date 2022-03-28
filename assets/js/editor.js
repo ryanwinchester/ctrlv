@@ -8,8 +8,10 @@ import {oneDark} from "@codemirror/theme-one-dark";
 // Languages.
 import {javascript} from "@codemirror/lang-javascript";
 
+const MAX_LENGTH = 56000;
+
 export default function createEditor(el){
-  new EditorView({
+  const editor = new EditorView({
     state: EditorState.create({
       extensions: [
         basicSetup,
