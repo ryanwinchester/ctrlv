@@ -2,6 +2,8 @@
   "dependencies": {
     "@codemirror/basic-setup": "^0.19.1",
     "@codemirror/lang-javascript": "^0.19.7",
-    "@codemirror/theme-one-dark": "^0.19.1"
+    "@codemirror/theme-one-dark": "^0.19.1",
+    "@types/phoenix": "^1.5.4",
+    "@types/phoenix_live_view": "^0.15.1"
   }
 }
