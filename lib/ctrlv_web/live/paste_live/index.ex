@@ -27,7 +27,7 @@ defmodule CtrlvWeb.PasteLive.Index do
   end
 
   defp apply_action(socket, :index, _params) do
-    push_redirect(socket, to: Routes.paste_index_path(socket, :new))
+    push_redirect(socket, to: Routes.paste_new_path(socket, :new))
   end
 
   @impl true

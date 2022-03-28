@@ -1,10 +1,10 @@
 <%= live_flash(@flash, :info) %>
 <%= live_flash(@flash, :error) %>
 
-<.live_component module={CtrlvWeb.SideBarComponent} id="sidebar" />
-
-<div class="lg:pl-64 flex flex-col flex-1">
+<div class="lg:pr-64 flex flex-col flex-1">
   <main class="flex-1 pb-8">
     <%= @inner_content %>
   </main>
 </div>
+
+<.live_component module={CtrlvWeb.SideBarComponent} id="sidebar" />
