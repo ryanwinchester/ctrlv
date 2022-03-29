@@ -1,10 +1,4 @@
 <%= live_flash(@flash, :info) %>
 <%= live_flash(@flash, :error) %>
 
-<div class="lg:pr-64 flex flex-col flex-1">
-  <main class="flex-1 pb-8">
-    <%= @inner_content %>
-  </main>
-</div>
-
-<.live_component module={CtrlvWeb.SideBarComponent} id="sidebar" is_editing={@is_editing} />
+<%= @inner_content %>

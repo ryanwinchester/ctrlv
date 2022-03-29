@@ -172,13 +172,57 @@ defmodule CtrlvWeb.SideBarComponent do
             </div>
             <div class="mt-6 pt-6">
               <div class="px-2 space-y-1">
+
+                <%= if @is_editing do %>
+                <div class="flex flex-1 flex-col justify-between">
+                  <div class="divide-y divide-gray-200 px-2">
+                    <div class="space-y-6 pt-6 pb-5">
+                      <.form let={f} for={@changeset} phx-change="form-change" phx-submit="save">
+                      <div>
+                        <%= label f, :language, class: "block text-sm font-medium text-gray-300" %>
+                        <%= select f, :language, [
+                            "C++": "cpp",
+                            "CSS": "css",
+                            "HTML": "html",
+                            "Java": "java",
+                            "JavaScript": "javascript",
+                            "JSON": "json",
+                            "Markdown": "markdown",
+                            "PHP": "php",
+                            "Python": "python",
+                            "Rust": "rust"
+                          ],
+                          prompt: [key: "Select language", disabled: true],
+                          class: "mt-1 block w-full pl-3 pr-10 py-2 text-base text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
+                        %>
+                      </div>
+                      <div>
+                        <%= label f, :expires_in, "Expires", class: "block text-sm font-medium text-gray-300" %>
+                        <%= select f, :expires_in, [
+                            "10 minutes": "10_minutes",
+                            "1 hour": "1_hour",
+                            "1 day": "1_day",
+                            "3 days": "3_days",
+                            "1 week": "1_week",
+                            "1 month": "1_month"
+                          ],
+                          prompt: [key: "Select language", disabled: true],
+                          class: "mt-1 block w-full pl-3 pr-10 py-2 text-base text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
+                        %>
+                      </div>
+                      </.form>
+                    </div>
+                  </div>
+                </div>
+                <% end %>
+
                 <a href="#" class="group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-gray-100 hover:text-white hover:bg-gray-600">
                   <!-- Heroicon name: outline/cog -->
                   <svg class="mr-4 h-6 w-6 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  Settings
+                  Advanced Settings
                 </a>
 
                 <a href="#" class="group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-gray-100 hover:text-white hover:bg-gray-600">

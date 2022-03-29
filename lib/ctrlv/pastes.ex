@@ -38,6 +38,22 @@ defmodule Ctrlv.Pastes do
   def get_paste!(id), do: Repo.get!(Paste, id)
 
   @doc """
+  Gets a single paste by keyword.
+
+  Raises `Ecto.NoResultsError` if the Paste does not exist.
+
+  ## Examples
+
+      iex> get_paste_by!(puid: "abc123")
+      %Paste{}
+
+      iex> get_paste_by!(puid: "notexists")
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_paste_by!(by), do: Repo.get_by!(Paste, by)
+
+  @doc """
   Creates a paste.
 
   ## Examples
@@ -98,7 +114,7 @@ defmodule Ctrlv.Pastes do
       %Ecto.Changeset{data: %Paste{}}
 
   """
-  def change_paste(%Paste{} = paste, attrs \\ %{}) do
+  def change_paste(paste, attrs \\ %{}) do
     Paste.changeset(paste, attrs)
   end
 end

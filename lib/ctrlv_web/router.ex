@@ -17,10 +17,10 @@ defmodule CtrlvWeb.Router do
   scope "/", CtrlvWeb do
     pipe_through :browser
 
-    live "/", PasteLive.Index, :index
-    live "/new", PasteLive.New, :new
-    live "/:puid/edit", PasteLive.Index, :edit
-    live "/:puid", PasteLive.Show, :show
+    live "/", PageLive, :index
+
+    live "/new", PasteLive.Editor, :new
+    live "/:puid", PasteLive.Editor, :show
   end
 
   # Other scopes may use custom stacks.

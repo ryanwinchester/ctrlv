@@ -76,7 +76,8 @@ export function setLanguage(view: EditorView, langName: string): void {
  * @returns The language support.
  */
 function langFromName(name: string): LanguageSupport {
-  const language = supportedLangs.find((lang) => { lang.name == name });
-  if (language === undefined) throw `unsupported language ${name}`;
+  const language = supportedLangs.find((lang) => lang.name == name);
+  if (language === undefined) { throw `unsupported language ${name}`; }
+  console.info("[ctrlv.io] Switching language:", name);
   return language();
 }
