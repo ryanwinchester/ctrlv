@@ -3,6 +3,7 @@ import {indentWithTab} from "@codemirror/commands";
 import {LanguageSupport} from "@codemirror/language";
 import {EditorView, keymap} from "@codemirror/view";
 import {Compartment, Transaction} from "@codemirror/state";
+import {StreamLanguage} from "@codemirror/stream-parser"
 
 // Themes.
 import {oneDark} from "@codemirror/theme-one-dark";
@@ -19,6 +20,10 @@ import {php} from "@codemirror/lang-php";
 import {python} from "@codemirror/lang-python";
 import {rust} from "@codemirror/lang-rust";
 
+// CM5 languages.
+import {elixir} from "./modes/elixir";
+import * as legacyModes from "./modes/legacy";
+
 // Symbolic constants.
 const MAX_LENGTH = 56e3;
 
@@ -28,6 +33,8 @@ const languageConf = new Compartment();
 const supportedLangs = [
   cpp, css, html, java, javascript, json, markdown, php, python, rust,
 ];
+
+const legacyLanguages = Object.assign(legacyModes, {elixir});
 
 /**
  * Create a CodeMirror 6 editor in an HTML element.
@@ -65,7 +72,7 @@ export function setLanguage(view: EditorView, langName: string): void {
  * @param tr - The transaction for the filter.
  * @returns Whether or not this transaction should apply.
  */
- function lengthLimit(tr: Transaction): boolean {
+function lengthLimit(tr: Transaction): boolean {
   // TODO: I don't like this. Do something about it later.
   return (tr.startState?.doc?.length + tr.changes?.inserted?.length) < MAX_LENGTH;
 }
@@ -75,9 +82,15 @@ export function setLanguage(view: EditorView, langName: string): void {
  * @param name - The name of the language.
  * @returns The language support.
  */
-function langFromName(name: string): LanguageSupport {
+function langFromName(name: string): LanguageSupport | StreamLanguage<unknown> {
   const language = supportedLangs.find((lang) => lang.name == name);
-  if (language === undefined) { throw `unsupported language ${name}`; }
   console.info("[ctrlv.io] Switching language:", name);
+
+  if (language === undefined) {
+    const legacy = legacyLanguages[name];
+    if (legacy === undefined) { throw `unsupported language ${name}`; }
+    return StreamLanguage.define(legacy);
+   }
+
   return language();
 }

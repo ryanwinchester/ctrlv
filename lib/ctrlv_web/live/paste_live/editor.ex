@@ -49,6 +49,6 @@ defmodule CtrlvWeb.PasteLive.Editor do
   end
 
   defp changeset(:new, _params) do
-    Pastes.change_paste(%Paste{}, %{language: :javascript})
+    Pastes.change_paste(%Paste{}, %{language: :javascript, expires_in: "1_day"})
   end
 end

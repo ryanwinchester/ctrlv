@@ -11,6 +11,8 @@
     "@codemirror/lang-php": "^0.19.1",
     "@codemirror/lang-python": "^0.19.4",
     "@codemirror/lang-rust": "^0.19.2",
+    "@codemirror/legacy-modes": "^0.19.1",
+    "@codemirror/stream-parser": "^0.19.7",
     "@codemirror/theme-one-dark": "^0.19.1",
     "@types/phoenix": "^1.5.4",
     "@types/phoenix_live_view": "^0.15.1"

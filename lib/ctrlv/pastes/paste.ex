@@ -9,10 +9,12 @@ defmodule Ctrlv.Pastes.Paste do
   @supported_languages [
     :cpp,
     :css,
+    :elixir,
     :html,
     :java,
     :javascript,
     :json,
+    :lua,
     :markdown,
     :php,
     :python,
