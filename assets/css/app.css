@@ -10,6 +10,10 @@
   font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.cm-editor .cm-gutters {
+  color: #545a66;
+}
+
 .kbd {
   display: inline-flex;
   align-items: center;

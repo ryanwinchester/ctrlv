@@ -10,7 +10,7 @@ import {cobol} from "@codemirror/legacy-modes/mode/cobol";
 import {coffeeScript} from "@codemirror/legacy-modes/mode/coffeescript";
 import {commonLisp} from "@codemirror/legacy-modes/mode/commonlisp";
 import {crystal} from "@codemirror/legacy-modes/mode/crystal";
-import {css, sCSS, less} from "@codemirror/legacy-modes/mode/css";
+import {sCSS, less} from "@codemirror/legacy-modes/mode/css";
 import {cypher} from "@codemirror/legacy-modes/mode/cypher";
 import {d} from "@codemirror/legacy-modes/mode/d";
 import {diff} from "@codemirror/legacy-modes/mode/diff";
@@ -58,7 +58,6 @@ import {powerShell} from "@codemirror/legacy-modes/mode/powershell";
 import {properties} from "@codemirror/legacy-modes/mode/properties";
 import {protobuf} from "@codemirror/legacy-modes/mode/protobuf";
 import {puppet} from "@codemirror/legacy-modes/mode/puppet";
-import {python} from "@codemirror/legacy-modes/mode/python";
 import {q} from "@codemirror/legacy-modes/mode/q";
 import {r} from "@codemirror/legacy-modes/mode/r";
 import {ruby} from "@codemirror/legacy-modes/mode/ruby";
@@ -112,7 +111,7 @@ export default {
   coffeeScript,
   commonLisp,
   crystal,
-  css, sCSS, less,
+  sCSS, less,
   cypher,
   d,
   diff,
@@ -162,7 +161,6 @@ export default {
   properties,
   protobuf,
   puppet,
-  python,
   q,
   r,
   ruby,

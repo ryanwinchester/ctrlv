@@ -4,31 +4,31 @@ defmodule Ctrlv.Pastes.Paste do
 
   import Ecto.Changeset
 
+  alias Ctrlv.Pastes.Language
   alias Ctrlv.Pastes.PUID
 
-  @supported_languages [
-    :cpp,
-    :css,
-    :elixir,
-    :html,
-    :java,
-    :javascript,
-    :json,
-    :lua,
-    :markdown,
-    :php,
-    :python,
-    :rust
-  ]
+  @type t :: %__MODULE__{
+          id: String.t(),
+          puid: String.t(),
+          content_sha: String.t(),
+          content: [[String.t()]],
+          language: atom(),
+          expires_at: DateTime.t(),
+          expires_in: String.t() | nil,
+          inserted_at: DateTime.t(),
+          updated_at: DateTime.t()
+        }
 
   schema "pastes" do
     field :puid, :string
     field :content_sha, :string
-    field :content, :string
-    field :language, Ecto.Enum, values: @supported_languages
+    field :content, {:array, {:array, :string}}
+    field :language, Ecto.Enum, values: Language.list()
     field :expires_at, :utc_datetime
 
-    field :expires_in, Ecto.Enum, values: [:"10_minutes", :"1_hour", :"1_day", :"3_days", :"1_week", :"1_month"], virtual: true
+    field :expires_in, Ecto.Enum,
+      values: ~w(10_minutes 1_hour 1_day 3_days 1_week 1_month")a,
+      virtual: true
 
     timestamps()
   end
@@ -37,7 +37,8 @@ defmodule Ctrlv.Pastes.Paste do
   def changeset(paste, attrs) do
     paste
     |> cast(attrs, [:content, :expires_in, :language])
-    |> validate_required([:content, :expires_in, :language])
+    |> validate_length(:content, greater_than_or_equal_to: 1)
+    |> validate_required([:expires_in, :language])
     |> put_expires_at()
     |> put_puid()
     |> put_sha()
@@ -50,13 +51,11 @@ defmodule Ctrlv.Pastes.Paste do
         changeset
 
       expires_in ->
-        seconds = expires_in_to_seconds(expires_in)
-        expires_at = DateTime.utc_now() |> DateTime.add(seconds, :second)
+        expires_at = expires_in_to_seconds(expires_in) |> add_seconds_to_now()
         put_change(changeset, :expires_at, expires_at)
     end
   end
 
-  # Add the PUID to the paste.
   defp put_puid(%{valid?: true} = changeset) do
     case get_field(changeset, :puid) do
       nil ->
@@ -67,28 +66,31 @@ defmodule Ctrlv.Pastes.Paste do
     end
   end
 
-  # Only bother generating PUID if changeset is valid.
   defp put_puid(changeset), do: changeset
 
-  # Add the content SHA.
   defp put_sha(%{valid?: true} = changeset) do
     case get_change(changeset, :content) do
       nil ->
         changeset
 
       content ->
-        put_change(changeset, :content_sha, :crypto.hash(:sha256, content))
+        hash = :crypto.hash(:sha256, content) |> Base.encode16()
+        put_change(changeset, :content_sha, hash)
     end
   end
 
-  # Only bother generating SHA if changeset is valid.
   defp put_sha(changeset), do: changeset
 
-  # Get the amount of seconds from now that it expires at.
   defp expires_in_to_seconds(:"10_minutes"), do: 600
   defp expires_in_to_seconds(:"1_hour"), do: 86400
   defp expires_in_to_seconds(:"1_day"), do: 86400
-  defp expires_in_to_seconds(:"3_days"), do: 259200
-  defp expires_in_to_seconds(:"1_week"), do: 604800
-  defp expires_in_to_seconds(:"1_month"), do: 2628000
+  defp expires_in_to_seconds(:"3_days"), do: 259_200
+  defp expires_in_to_seconds(:"1_week"), do: 604_800
+  defp expires_in_to_seconds(:"1_month"), do: 2_628_000
+
+  defp add_seconds_to_now(seconds) do
+    DateTime.utc_now()
+    |> DateTime.add(seconds, :second)
+    |> DateTime.truncate(:second)
+  end
 end

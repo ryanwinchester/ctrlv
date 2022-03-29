@@ -4,9 +4,11 @@ defmodule Ctrlv.Pastes do
   """
 
   import Ecto.Query, warn: false
-  alias Ctrlv.Repo
+
+  alias Ecto.Changeset
 
   alias Ctrlv.Pastes.Paste
+  alias Ctrlv.Repo
 
   @doc """
   Returns the list of pastes.
@@ -65,7 +67,11 @@ defmodule Ctrlv.Pastes do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_paste(attrs \\ %{}) do
+  def create_paste(%Changeset{} = changeset) do
+    Repo.insert(changeset)
+  end
+
+  def create_paste(attrs) do
     %Paste{}
     |> Paste.changeset(attrs)
     |> Repo.insert()

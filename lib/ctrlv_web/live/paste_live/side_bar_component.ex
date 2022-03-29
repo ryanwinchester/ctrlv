@@ -1,4 +1,4 @@
-defmodule CtrlvWeb.SideBarComponent do
+defmodule CtrlvWeb.PasteLive.SideBarComponent do
   use CtrlvWeb, :live_component
 
   @impl true
@@ -135,14 +135,26 @@ defmodule CtrlvWeb.SideBarComponent do
           </div>
           <nav class="mt-5 flex-1 flex flex-col divide-y divide-gray-800 overflow-y-auto" aria-label="Sidebar">
             <div class="px-2 space-y-1">
-              <!-- Current: "bg-gray-800 text-white", Default: "text-gray-100 hover:text-white hover:bg-gray-600" -->
-              <a href="#" class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" aria-current="page">
-                <!-- Heroicon name: outline/save -->
-                <svg class="mr-4 flex-shrink-0 h-6 w-6 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
-                </svg>
-                Save
-              </a>
+              <%= if @is_editing do %>
+                <!-- Current: "bg-gray-800 text-white", Default: "text-gray-100 hover:text-white hover:bg-gray-600" -->
+                <a href="#init-save" class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" aria-current="page"
+                  phx-click="init-save">
+                  <!-- Heroicon name: outline/save -->
+                  <svg class="mr-4 flex-shrink-0 h-6 w-6 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                  </svg>
+                  Save
+                </a>
+              <% else %>
+                <!-- Current: "bg-gray-800 text-white", Default: "text-gray-100 hover:text-white hover:bg-gray-600" -->
+                <span class="text-gray-400 group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md" aria-current="page">
+                  <!-- Heroicon name: outline/save -->
+                  <svg class="mr-4 flex-shrink-0 h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                  </svg>
+                  Save
+                </span>
+              <% end %>
 
               <%= if @is_editing do %>
                 <span class="text-gray-400 group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md">
@@ -153,16 +165,16 @@ defmodule CtrlvWeb.SideBarComponent do
                   Fork and edit
                 </span>
               <% else %>
-                <a href="#" class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md">
+                <a href={Routes.paste_editor_path(@socket, :new, @puid)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md">
                   <!-- Heroicon name: outline/document-duplicate -->
                   <svg class="mr-4 flex-shrink-0 h-6 w-6 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path>
                   </svg>
-                  Fork
+                  Fork and edit
                 </a>
               <% end %>
 
-              <a href="#" class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md">
+              <a href={Routes.paste_editor_path(@socket, :new)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md">
                 <!-- Heroicon name: outline/plus-circle -->
                 <svg class="mr-4 flex-shrink-0 h-6 w-6 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -174,10 +186,10 @@ defmodule CtrlvWeb.SideBarComponent do
               <div class="px-2 space-y-1">
 
                 <%= if @is_editing do %>
+                <.form let={f} for={@changeset} phx-change="form-change" phx-submit="save">
                 <div class="flex flex-1 flex-col justify-between">
                   <div class="divide-y divide-gray-200 px-2">
                     <div class="space-y-6 pt-6 pb-5">
-                      <.form let={f} for={@changeset} phx-change="form-change" phx-submit="save">
                       <div>
                         <%= label f, :language, class: "block text-sm font-medium text-gray-300" %>
                         <%= select f, :language, [
@@ -206,7 +218,6 @@ defmodule CtrlvWeb.SideBarComponent do
                             [key: "coffeeScript", value: "coffeeScript"],
                             [key: "commonLisp", value: "commonLisp"],
                             [key: "crystal", value: "crystal"],
-                            [key: "css", value: "css"],
                             [key: "sCSS", value: "sCSS"],
                             [key: "less", value: "less"],
                             [key: "cypher", value: "cypher"],
@@ -262,7 +273,6 @@ defmodule CtrlvWeb.SideBarComponent do
                             [key: "properties", value: "properties"],
                             [key: "protobuf", value: "protobuf"],
                             [key: "puppet", value: "puppet"],
-                            [key: "python", value: "python"],
                             [key: "q", value: "q"],
                             [key: "r", value: "r"],
                             [key: "ruby", value: "ruby"],
@@ -318,10 +328,10 @@ defmodule CtrlvWeb.SideBarComponent do
                           class: "mt-1 block w-full pl-3 pr-10 py-2 text-base text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
                         %>
                       </div>
-                      </.form>
                     </div>
                   </div>
                 </div>
+                </.form>
                 <% end %>
 
                 <a href="#" class="group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-gray-100 hover:text-white hover:bg-gray-600">

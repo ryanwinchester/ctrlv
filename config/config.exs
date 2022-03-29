@@ -18,6 +18,11 @@ config :ctrlv, CtrlvWeb.Endpoint,
   pubsub_server: Ctrlv.PubSub,
   live_view: [signing_salt: "6g3Gd2nI"]
 
+config :ctrlv, Ctrlv.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id],
+  migration_timestamps: [type: :utc_datetime]
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

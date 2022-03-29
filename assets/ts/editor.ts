@@ -2,7 +2,7 @@ import {EditorState, basicSetup} from "@codemirror/basic-setup";
 import {indentWithTab} from "@codemirror/commands";
 import {LanguageSupport} from "@codemirror/language";
 import {EditorView, keymap} from "@codemirror/view";
-import {Compartment, Transaction} from "@codemirror/state";
+import {Compartment, Transaction, Text} from "@codemirror/state";
 import {StreamLanguage} from "@codemirror/stream-parser"
 
 // Themes.
@@ -41,10 +41,11 @@ const legacyLanguages = Object.assign(legacyModes, {elixir});
  * @param el - The element to add the editor to.
  * @returns The editor view.
  */
-export function createEditorView(el: HTMLElement): EditorView {
+export function createEditorView(el: HTMLElement, config: any): EditorView {
   return new EditorView({
     state: EditorState.create({
       extensions: [
+        EditorState.readOnly.of(config.readOnly),
         EditorState.changeFilter.of(lengthLimit),
         basicSetup,
         oneDark,
@@ -53,6 +54,17 @@ export function createEditorView(el: HTMLElement): EditorView {
       ]
     }),
     parent: el
+  });
+}
+
+/**
+ * Set the editor view text content.
+ * @param view - The editor view.
+ * @param doc - The editor text content as a list of lines.
+ */
+export function setDoc(view: EditorView, doc: Array<string>): void {
+  view.dispatch({
+    changes: {from: 0, insert: Text.of(doc)}
   });
 }
 
@@ -73,8 +85,7 @@ export function setLanguage(view: EditorView, langName: string): void {
  * @returns Whether or not this transaction should apply.
  */
 function lengthLimit(tr: Transaction): boolean {
-  // TODO: I don't like this. Do something about it later.
-  return (tr.startState?.doc?.length + tr.changes?.inserted?.length) < MAX_LENGTH;
+  return tr.newDoc.length < MAX_LENGTH;
 }
 
 /**

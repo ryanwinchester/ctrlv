@@ -4,9 +4,21 @@ defmodule CtrlvWeb.PasteLiveTest do
   import Phoenix.LiveViewTest
   import Ctrlv.PastesFixtures
 
-  @create_attrs %{content: "some content", expires_at: %{day: 27, hour: 3, minute: 2, month: 3, year: 2022}, puid: "some puid"}
-  @update_attrs %{content: "some updated content", expires_at: %{day: 28, hour: 3, minute: 2, month: 3, year: 2022}, puid: "some updated puid"}
-  @invalid_attrs %{content: nil, expires_at: %{day: 30, hour: 3, minute: 2, month: 2, year: 2022}, puid: nil}
+  @create_attrs %{
+    content: "some content",
+    expires_at: %{day: 27, hour: 3, minute: 2, month: 3, year: 2022},
+    puid: "some puid"
+  }
+  @update_attrs %{
+    content: "some updated content",
+    expires_at: %{day: 28, hour: 3, minute: 2, month: 3, year: 2022},
+    puid: "some updated puid"
+  }
+  @invalid_attrs %{
+    content: nil,
+    expires_at: %{day: 30, hour: 3, minute: 2, month: 2, year: 2022},
+    puid: nil
+  }
 
   defp create_paste(_) do
     paste = paste_fixture()

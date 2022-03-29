@@ -21,6 +21,7 @@ defmodule CtrlvWeb.Router do
 
     live "/new", PasteLive.Editor, :new
     live "/:puid", PasteLive.Editor, :show
+    live "/:puid/fork", PasteLive.Editor, :new
   end
 
   # Other scopes may use custom stacks.

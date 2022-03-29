@@ -21,7 +21,11 @@ defmodule Ctrlv.PastesTest do
     end
 
     test "create_paste/1 with valid data creates a paste" do
-      valid_attrs = %{content: "some content", expires_at: ~U[2022-03-27 03:02:00Z], puid: "some puid"}
+      valid_attrs = %{
+        content: "some content",
+        expires_at: ~U[2022-03-27 03:02:00Z],
+        puid: "some puid"
+      }
 
       assert {:ok, %Paste{} = paste} = Pastes.create_paste(valid_attrs)
       assert paste.content == "some content"
@@ -35,7 +39,12 @@ defmodule Ctrlv.PastesTest do
 
     test "update_paste/2 with valid data updates the paste" do
       paste = paste_fixture()
-      update_attrs = %{content: "some updated content", expires_at: ~U[2022-03-28 03:02:00Z], puid: "some updated puid"}
+
+      update_attrs = %{
+        content: "some updated content",
+        expires_at: ~U[2022-03-28 03:02:00Z],
+        puid: "some updated puid"
+      }
 
       assert {:ok, %Paste{} = paste} = Pastes.update_paste(paste, update_attrs)
       assert paste.content == "some updated content"
