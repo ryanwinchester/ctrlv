@@ -26,8 +26,8 @@ const languageConf = new Compartment;
 
 /**
  * Create a CodeMirror 6 editor in an HTML element.
- * @param {HTMLElement} el - The element to add the editor to.
- * @returns {EditorView}
+ * @param el - The element to add the editor to.
+ * @returns The editor view.
  */
 function createEditor(el: HTMLElement): EditorView {
   return new EditorView({
@@ -46,8 +46,8 @@ function createEditor(el: HTMLElement): EditorView {
 
 /**
  * Change the editor language.
- * @param {EditorView} view - The editor view.
- * @param {string} langName - The name of the language.
+ * @param view - The editor view.
+ * @param langName - The name of the language.
  */
 function setLanguage(view: EditorView, langName: string): void {
   view.dispatch({
@@ -57,8 +57,8 @@ function setLanguage(view: EditorView, langName: string): void {
 
 /**
  * Get the CM language support from the name.
- * @param {string} name - The name of the language.
- * @returns {any}
+ * @param name - The name of the language.
+ * @returns The language support.
  */
 function langFromName(name: string): any {
   switch (name) {
@@ -82,13 +82,15 @@ function langFromName(name: string): any {
       return python();
     case "rust":
       return rust();
+    default:
+      throw `unsupported language ${name}`;
   }
 }
 
 /**
  * Change filter function for the editor state.
- * @param {Transaction} tr - The transaction for the filter.
- * @returns {boolean} - Whether or not this transaction should apply.
+ * @param tr - The transaction for the filter.
+ * @returns Whether or not this transaction should apply.
  */
  function lengthLimit(tr: Transaction): boolean {
   // TODO: I don't like this. Do something about it later.
