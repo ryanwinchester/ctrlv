@@ -1,4 +1,4 @@
-import createEditor from "./editor";
+import {createEditor} from "./editor";
 
 const Editor = {
   mounted() {

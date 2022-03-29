@@ -1,7 +1,16 @@
 {
   "dependencies": {
     "@codemirror/basic-setup": "^0.19.1",
+    "@codemirror/lang-cpp": "^0.19.1",
+    "@codemirror/lang-css": "^0.19.3",
+    "@codemirror/lang-html": "^0.19.4",
+    "@codemirror/lang-java": "^0.19.1",
     "@codemirror/lang-javascript": "^0.19.7",
+    "@codemirror/lang-json": "^0.19.2",
+    "@codemirror/lang-markdown": "^0.19.6",
+    "@codemirror/lang-php": "^0.19.1",
+    "@codemirror/lang-python": "^0.19.4",
+    "@codemirror/lang-rust": "^0.19.2",
     "@codemirror/theme-one-dark": "^0.19.1",
     "@types/phoenix": "^1.5.4",
     "@types/phoenix_live_view": "^0.15.1"
