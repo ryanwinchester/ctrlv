@@ -1,11 +1,7 @@
 import {createEditor} from "./editor";
 
-const Editor = {
+export const Editor = {
   mounted() {
     this.editor = createEditor(this.el);
   }
 };
-
-export {
-  Editor,
-}

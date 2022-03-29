@@ -1,5 +1,6 @@
 import {EditorState, basicSetup} from "@codemirror/basic-setup";
 import {indentWithTab} from "@codemirror/commands";
+import {LanguageSupport} from "@codemirror/language";
 import {EditorView, keymap} from "@codemirror/view";
 import {Compartment, Transaction} from "@codemirror/state";
 
@@ -21,15 +22,19 @@ import {rust} from "@codemirror/lang-rust";
 // Symbolic constants.
 const MAX_LENGTH = 56e3;
 
-// Variable for everyone in this dang file...
-const languageConf = new Compartment;
+// Variables for everyone in this dang file...
+const languageConf = new Compartment();
+
+const supportedLangs = [
+  cpp, css, html, java, javascript, json, markdown, php, python, rust,
+];
 
 /**
  * Create a CodeMirror 6 editor in an HTML element.
  * @param el - The element to add the editor to.
  * @returns The editor view.
  */
-function createEditor(el: HTMLElement): EditorView {
+export function createEditor(el: HTMLElement): EditorView {
   return new EditorView({
     state: EditorState.create({
       extensions: [
@@ -49,42 +54,10 @@ function createEditor(el: HTMLElement): EditorView {
  * @param view - The editor view.
  * @param langName - The name of the language.
  */
-function setLanguage(view: EditorView, langName: string): void {
+export function setLanguage(view: EditorView, langName: string): void {
   view.dispatch({
     effects: languageConf.reconfigure(langFromName(langName))
   })
-}
-
-/**
- * Get the CM language support from the name.
- * @param name - The name of the language.
- * @returns The language support.
- */
-function langFromName(name: string): any {
-  switch (name) {
-    case "cpp":
-      return cpp();
-    case "css":
-      return css();
-    case "html":
-      return html();
-    case "java":
-      return java();
-    case "javascript":
-      return javascript();
-    case "json":
-      return json();
-    case "markdown":
-      return markdown();
-    case "php":
-      return php();
-    case "python":
-      return python();
-    case "rust":
-      return rust();
-    default:
-      throw `unsupported language ${name}`;
-  }
 }
 
 /**
@@ -97,7 +70,13 @@ function langFromName(name: string): any {
   return (tr.startState?.doc?.length + tr.changes?.inserted?.length) < MAX_LENGTH;
 }
 
-export {
-  createEditor,
-  setLanguage,
-};
+/**
+ * Get the CM language support from the name.
+ * @param name - The name of the language.
+ * @returns The language support.
+ */
+function langFromName(name: string): LanguageSupport {
+  const language = supportedLangs.find((lang) => { lang.name == name });
+  if (language === undefined) throw `unsupported language ${name}`;
+  return language();
+}
