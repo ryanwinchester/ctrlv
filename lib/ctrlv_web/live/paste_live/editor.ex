@@ -18,7 +18,7 @@ defmodule CtrlvWeb.PasteLive.Editor do
 
   @impl true
   def handle_event("form-change", %{"paste" => paste_attrs}, socket) do
-    changeset = Pastes.change_paste(%Paste{content: "noop"}, paste_attrs)
+    changeset = Pastes.change_paste(%Paste{}, paste_attrs)
     language = changeset.changes.language
 
     {:noreply,
@@ -49,6 +49,6 @@ defmodule CtrlvWeb.PasteLive.Editor do
   end
 
   defp changeset(:new, _params) do
-    Pastes.change_paste(%Paste{content: "noop"}, %{language: :javascript})
+    Pastes.change_paste(%Paste{}, %{language: :javascript})
   end
 end

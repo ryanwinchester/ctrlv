@@ -196,7 +196,7 @@ defmodule CtrlvWeb.SideBarComponent do
                           class: "mt-1 block w-full pl-3 pr-10 py-2 text-base text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
                         %>
                       </div>
-                      <div>
+                      <div class="mt-2">
                         <%= label f, :expires_in, "Expires", class: "block text-sm font-medium text-gray-300" %>
                         <%= select f, :expires_in, [
                             "10 minutes": "10_minutes",
@@ -206,7 +206,7 @@ defmodule CtrlvWeb.SideBarComponent do
                             "1 week": "1_week",
                             "1 month": "1_month"
                           ],
-                          prompt: [key: "Select language", disabled: true],
+                          prompt: [key: "Select expiry", disabled: true],
                           class: "mt-1 block w-full pl-3 pr-10 py-2 text-base text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
                         %>
                       </div>
