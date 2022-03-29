@@ -34,7 +34,7 @@ const supportedLangs = [
  * @param el - The element to add the editor to.
  * @returns The editor view.
  */
-export function createEditor(el: HTMLElement): EditorView {
+export function createEditorView(el: HTMLElement): EditorView {
   return new EditorView({
     state: EditorState.create({
       extensions: [
