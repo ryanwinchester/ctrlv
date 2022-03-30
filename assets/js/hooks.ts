@@ -8,9 +8,10 @@ export const Editor = {
 
     const editorView = createEditorView(this.el, config);
 
-    this.pushEvent("editor-created", {}, ({doc}) => {
+    this.pushEvent("editor-created", {}, ({doc, language}) => {
       if (doc != null) {
         setDoc(editorView, doc);
+        setLanguage(editorView, language);
       }
     });
 

@@ -20,7 +20,8 @@ defmodule CtrlvWeb.PasteLive.Editor do
   @impl true
   def handle_event("editor-created", _params, socket) do
     doc = socket.assigns[:paste] && List.first(socket.assigns.paste.content)
-    {:reply, %{doc: doc}, socket}
+    language = socket.assigns[:paste] && socket.assigns.paste.language
+    {:reply, %{doc: doc, language: language}, socket}
   end
 
   def handle_event("form-change", %{"paste" => paste_attrs}, socket) do
