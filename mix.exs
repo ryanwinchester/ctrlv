@@ -33,6 +33,7 @@ defmodule Ctrlv.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      # Application defaults.
       {:phoenix, "~> 1.6.6"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
@@ -49,7 +50,10 @@ defmodule Ctrlv.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
+
+      # Additional libraries.
       {:puid, "~> 1.0"},
+      {:sched_ex, "~> 1.0"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
     ]
   end

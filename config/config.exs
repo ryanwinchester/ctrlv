@@ -23,6 +23,8 @@ config :ctrlv, Ctrlv.Repo,
   migration_foreign_key: [type: :binary_id],
   migration_timestamps: [type: :utc_datetime]
 
+config :ctrlv, SchedEx, schedules: []
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

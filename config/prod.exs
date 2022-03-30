@@ -11,6 +11,14 @@ import Config
 # before starting your production server.
 config :ctrlv, CtrlvWeb.Endpoint, cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :ctrlv, SchedEx,
+  schedules: [
+    %{
+      id: "delete-expired",
+      start: {SchedEx, :run_every, [Ctrlv.Pastes, :delete_all_expired_pastes, [], "* * * * *"]}
+    }
+  ]
+
 # Do not print debug messages in production
 config :logger, level: :info
 

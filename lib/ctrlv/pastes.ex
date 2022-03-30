@@ -134,6 +134,16 @@ defmodule Ctrlv.Pastes do
   end
 
   @doc """
+  Deletes all of the pastes that are expired.
+  """
+  def delete_all_expired_pastes do
+    Repo.delete_all(
+      from p in Paste,
+        where: p.expires_at <= ^DateTime.utc_now()
+    )
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for tracking paste changes.
 
   ## Examples

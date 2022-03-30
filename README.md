@@ -17,13 +17,13 @@ Code paste-bin and editor.
 - [x] Limit content length
 - [ ] Cache
 - [ ] Rate-limiting `save`
-- [ ] Delete expired pastes
+- [x] Delete expired pastes
 - [ ] Testing and Static Analysis
   * [ ] ExUnit
   * [ ] Credo
   * [ ] Dialyzer
 - [ ] CI/CD (Github actions)
-- [ ] Deploy
+- [x] Deploy
 - [ ] meta/og tags for better links
 - [ ] Mobile sidebar
 

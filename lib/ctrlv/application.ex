@@ -5,6 +5,8 @@ defmodule Ctrlv.Application do
 
   use Application
 
+  @app :ctrlv
+
   @impl true
   def start(_type, _args) do
     children = [
@@ -18,6 +20,7 @@ defmodule Ctrlv.Application do
       CtrlvWeb.Endpoint
       # Start a worker by calling: Ctrlv.Worker.start_link(arg)
       # {Ctrlv.Worker, arg}
+      | schedules()
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -32,5 +35,10 @@ defmodule Ctrlv.Application do
   def config_change(changed, _new, removed) do
     CtrlvWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  # Get the schedules that should run.
+  defp schedules do
+    Application.fetch_env!(@app, Schedex) |> Keyword.fetch!(:schedules)
   end
 end
