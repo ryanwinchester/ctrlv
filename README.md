@@ -29,6 +29,7 @@ Code paste-bin and editor.
 
 #### v2.0
 
+- [ ] Improve/fix "flash" between `show` and `fork`
 - [ ] Versions
 - [ ] Advanced settings (`tabSize`, etc)
 - [ ] Help menu
