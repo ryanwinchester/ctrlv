@@ -203,7 +203,7 @@ defmodule CtrlvWeb.PasteLive.SideBarComponent do
                             [key: "PHP", value: "php"],
                             [key: "Python", value: "python"],
                             [key: "Rust", value: "rust"],
-                            [key: "----Legacy----", value: "", disabled: true],
+                            [key: "----syntax-only----", value: "", disabled: true],
                             [key: "apl", value: "apl"],
                             [key: "asciiArmor", value: "asciiArmor"],
                             [key: "asn1", value: "asn1"],
