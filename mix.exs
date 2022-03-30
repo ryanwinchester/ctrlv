@@ -67,7 +67,7 @@ defmodule Ctrlv.MixProject do
   defp aliases do
     [
       "assets.install": ["cmd npm install --prefix assets"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"],
+      "assets.deploy": ["tailwind default --minify", "esbuild default", "phx.digest"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       setup: ["deps.get", "ecto.setup"],
