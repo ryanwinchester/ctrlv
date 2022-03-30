@@ -7,6 +7,10 @@ defmodule CtrlvWeb.PasteLive.Editor do
 
   require Logger
 
+  # ----------------------------------------------------------------------------
+  # LiveView Callbacks
+  # ----------------------------------------------------------------------------
+
   @impl true
   def mount(_params, _session, socket) do
     {:ok, socket}
