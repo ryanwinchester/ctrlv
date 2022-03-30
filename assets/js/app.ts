@@ -5,7 +5,6 @@ import "phoenix_html";
 import {Socket} from "phoenix";
 import {LiveSocket} from "phoenix_live_view";
 import {Editor} from "./hooks";
-import topbar from "../vendor/topbar";
 
 // Extend the window interface to include liveSocket.
 declare global {
@@ -13,11 +12,6 @@ declare global {
     liveSocket: LiveSocket;
   }
 }
-
-// Show progress bar on live navigation and form submits.
-topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"});
-window.addEventListener("phx:page-loading-start", info => topbar.show());
-window.addEventListener("phx:page-loading-stop", info => topbar.hide());
 
 // CSRF token.
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
