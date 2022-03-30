@@ -59,7 +59,7 @@ defmodule CtrlvWeb.PasteLive.Editor do
   # ----------------------------------------------------------------------------
 
   defp apply_action(socket, :new, params) do
-    paste = params["puid"] && Pastes.get_paste_by!(puid: params["puid"])
+    paste = params["puid"] && Pastes.get_active_paste_by_puid!(params["puid"])
 
     socket
     |> assign(:page_title, "New Paste")
@@ -73,7 +73,7 @@ defmodule CtrlvWeb.PasteLive.Editor do
     |> assign(:page_title, "View Paste")
     |> assign(:is_editing, false)
     |> assign(:changeset, nil)
-    |> assign(:paste, Pastes.get_paste_by!(puid: puid))
+    |> assign(:paste, Pastes.get_active_paste_by_puid!(puid))
   end
 
   defp changeset(:new, %Paste{} = paste) do

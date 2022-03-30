@@ -56,6 +56,28 @@ defmodule Ctrlv.Pastes do
   def get_paste_by!(by), do: Repo.get_by!(Paste, by)
 
   @doc """
+  Gets a single paste by PUID (if it is not expired).
+
+  Raises `Ecto.NoResultsError` if the Paste does not exist.
+
+  ## Examples
+
+      iex> get_active_paste_by_puid!("abc123")
+      %Paste{}
+
+      iex> get_active_paste_by_puid!("notexists")
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_active_paste_by_puid!(puid) do
+    Repo.one!(
+      from p in Paste,
+        where: p.puid == ^puid,
+        where: p.expires_at > ^DateTime.utc_now()
+    )
+  end
+
+  @doc """
   Creates a paste.
 
   ## Examples
