@@ -25,7 +25,7 @@ Code paste-bin and editor.
 - [ ] CI/CD (Github actions)
 - [x] Deploy
 - [ ] meta/og tags for better links
-- [ ] Mobile menus
+- [x] Mobile menus
 - [ ] Overlayed alerts/errors
 
 #### v2.0
