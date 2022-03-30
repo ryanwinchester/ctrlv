@@ -1,11 +1,212 @@
 <div>
-  <!-- Static sidebar for desktop -->
-  <div class="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0 right-0 bg-gray-700 overflow-y-auto p-4">
+  <!-- Static sidebar for mobile -->
+  <div class="md:hidden fixed left-0 right-0 bottom-0 h-32 bg-gray-700 overflow-y-auto p-2">
+    <nav>
+      <div class="flex">
+        <div class="grow flex">
+          <a href={Routes.paste_editor_path(@socket, :new)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-1 px-2 text-sm leading-6 font-medium rounded-md">
+            <!-- Heroicon name: outline/plus-circle -->
+            <svg class="mr-2 flex-shrink-0 h-4 w-4 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            New
+          </a>
 
+
+          <%= if !@is_editing do %>
+            <a href={Routes.paste_editor_path(@socket, :new, @puid)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
+              <svg class="mr-2 flex-shrink-0 h-4 w-4 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="160" cy="96" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+                <circle cx="160" cy="416" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+                <line x1="160" y1="368" x2="160" y2="144" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+                <circle cx="352" cy="160" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+                <path d="M352,208c0,128-192,48-192,160" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+              </svg>
+              Fork
+            </a>
+          <% else %>
+            <a href='#' class="text-gray-100 cursor-not-allowed opacity-25 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
+              <svg class="mr-2 flex-shrink-0 h-4 w-4 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="160" cy="96" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+                <circle cx="160" cy="416" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+                <line x1="160" y1="368" x2="160" y2="144" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+                <circle cx="352" cy="160" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+                <path d="M352,208c0,128-192,48-192,160" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+              </svg>
+              Fork
+            </a>
+          <% end %>
+        </div>
+        <div class="shrink">
+          <%= if @is_editing do %>
+            <button class="flex items-center px-4 py-2 justify-center border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-current="page" phx-click="init-save">
+              <!-- Heroicon name: outline/save -->
+              <svg class="mr-2 flex-shrink-0 h-5 w-5 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+              </svg>
+              Save
+            </button>
+          <% end %>
+        </div>
+      </div>
+
+
+      <%= if @is_editing do %>
+        <div class="mt-1">
+          <.form let={f} for={@changeset} phx-change="form-change" phx-submit="save">
+            <div class="space-y-2">
+              <div class="flex items-center">
+                <%= label f, :language, class: "text-xs font-medium text-gray-300 w-24 text-right pr-2" %>
+                <%= select f, :language, [
+                    [key: "C++", value: "cpp"],
+                    [key: "CSS", value: "css"],
+                    [key: "HTML", value: "html"],
+                    [key: "Java", value: "java"],
+                    [key: "JavaScript", value: "javascript"],
+                    [key: "JSON", value: "json"],
+                    [key: "Markdown", value: "markdown"],
+                    [key: "PHP", value: "php"],
+                    [key: "Python", value: "python"],
+                    [key: "Rust", value: "rust"],
+                    [key: "----syntax-only----", value: "", disabled: true],
+                    [key: "apl", value: "apl"],
+                    [key: "asciiArmor", value: "asciiArmor"],
+                    [key: "asn1", value: "asn1"],
+                    [key: "asterisk", value: "asterisk"],
+                    [key: "brainfuck", value: "brainfuck"],
+                    [key: "c", value: "c"],
+                    [key: "csharp", value: "csharp"],
+                    [key: "dart", value: "dart"],
+                    [key: "clojure", value: "clojure"],
+                    [key: "cmake", value: "cmake"],
+                    [key: "cobol", value: "cobol"],
+                    [key: "coffeeScript", value: "coffeeScript"],
+                    [key: "commonLisp", value: "commonLisp"],
+                    [key: "crystal", value: "crystal"],
+                    [key: "sCSS", value: "sCSS"],
+                    [key: "less", value: "less"],
+                    [key: "cypher", value: "cypher"],
+                    [key: "d", value: "d"],
+                    [key: "diff", value: "diff"],
+                    [key: "dockerFile", value: "dockerFile"],
+                    [key: "dtd", value: "dtd"],
+                    [key: "dylan", value: "dylan"],
+                    [key: "ebnf", value: "ebnf"],
+                    [key: "ecl", value: "ecl"],
+                    [key: "eiffel", value: "eiffel"],
+                    [key: "elixir", value: "elixir"],
+                    [key: "elm", value: "elm"],
+                    [key: "erlang", value: "erlang"],
+                    [key: "factor", value: "factor"],
+                    [key: "fcl", value: "fcl"],
+                    [key: "forth", value: "forth"],
+                    [key: "fortran", value: "fortran"],
+                    [key: "fSharp", value: "fSharp"],
+                    [key: "gas", value: "gas"],
+                    [key: "gherkin", value: "gherkin"],
+                    [key: "go", value: "go"],
+                    [key: "groovy", value: "groovy"],
+                    [key: "haskell", value: "haskell"],
+                    [key: "haxe", value: "haxe"],
+                    [key: "http", value: "http"],
+                    [key: "idl", value: "idl"],
+                    [key: "kotlin", value: "kotlin"],
+                    [key: "jinja2", value: "jinja2"],
+                    [key: "julia", value: "julia"],
+                    [key: "liveScript", value: "liveScript"],
+                    [key: "lua", value: "lua"],
+                    [key: "mathematica", value: "mathematica"],
+                    [key: "mbox", value: "mbox"],
+                    [key: "mirc", value: "mirc"],
+                    [key: "msSQL", value: "msSQL"],
+                    [key: "oCaml", value: "oCaml"],
+                    [key: "plSQL", value: "plSQL"],
+                    [key: "sml", value: "sml"],
+                    [key: "modelica", value: "modelica"],
+                    [key: "mscgen", value: "mscgen"],
+                    [key: "mumps", value: "mumps"],
+                    [key: "nginx", value: "nginx"],
+                    [key: "nsis", value: "nsis"],
+                    [key: "ntriples", value: "ntriples"],
+                    [key: "objectiveC", value: "objectiveC"],
+                    [key: "octave", value: "octave"],
+                    [key: "oz", value: "oz"],
+                    [key: "pascal", value: "pascal"],
+                    [key: "perl", value: "perl"],
+                    [key: "pig", value: "pig"],
+                    [key: "powerShell", value: "powerShell"],
+                    [key: "properties", value: "properties"],
+                    [key: "protobuf", value: "protobuf"],
+                    [key: "puppet", value: "puppet"],
+                    [key: "q", value: "q"],
+                    [key: "r", value: "r"],
+                    [key: "ruby", value: "ruby"],
+                    [key: "sas", value: "sas"],
+                    [key: "scala", value: "scala"],
+                    [key: "scheme", value: "scheme"],
+                    [key: "shell", value: "shell"],
+                    [key: "sieve", value: "sieve"],
+                    [key: "smalltalk", value: "smalltalk"],
+                    [key: "solr", value: "solr"],
+                    [key: "sparql", value: "sparql"],
+                    [key: "spreadsheet", value: "spreadsheet"],
+                    [key: "sql", value: "sql"],
+                    [key: "stex", value: "stex"],
+                    [key: "stylus", value: "stylus"],
+                    [key: "swift", value: "swift"],
+                    [key: "tcl", value: "tcl"],
+                    [key: "textile", value: "textile"],
+                    [key: "tiki", value: "tiki"],
+                    [key: "toml", value: "toml"],
+                    [key: "troff", value: "troff"],
+                    [key: "ttcn", value: "ttcn"],
+                    [key: "turtle", value: "turtle"],
+                    [key: "typescript", value: "typescript"],
+                    [key: "vb", value: "vb"],
+                    [key: "vbScript", value: "vbScript"],
+                    [key: "velocity", value: "velocity"],
+                    [key: "verilog", value: "verilog"],
+                    [key: "vhdl", value: "vhdl"],
+                    [key: "wast", value: "wast"],
+                    [key: "webIDL", value: "webIDL"],
+                    [key: "xml", value: "xml"],
+                    [key: "xQuery", value: "xQuery"],
+                    [key: "yacas", value: "yacas"],
+                    [key: "yaml", value: "yaml"],
+                    [key: "z80", value: "z80"]
+                  ],
+                  prompt: [key: "Select language", disabled: true],
+                  class: "block w-full pl-2 pr-10 py-1 text-xs text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
+                %>
+              </div>
+
+              <div class="flex items-center">
+                <%= label f, :expires_in, "Expires", class: "text-xs font-medium text-gray-300 w-24 text-right pr-2" %>
+                <%= select f, :expires_in, [
+                    "10 minutes": "10_minutes",
+                    "1 hour": "1_hour",
+                    "1 day": "1_day",
+                    "3 days": "3_days",
+                    "1 week": "1_week",
+                    "1 month": "1_month"
+                  ],
+                  prompt: [key: "Select expiry", disabled: true],
+                  class: "block w-full pl-2 pr-10 py-1 text-xs text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
+                %>
+              </div>
+            </div>
+          </.form>
+        </div>
+      <% end %>
+    </nav>
+  </div>
+
+  <!-- Static sidebar for desktop -->
+  <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 right-0 bg-gray-700 overflow-y-auto p-4">
     <div class="keys justify-center">
-        <span>ctrl</span>
-        <span>v</span>
-        <span>.io</span>
+        <span class="key">ctrl</span>
+        <span class="key">v</span>
+        <span class="key">.io</span>
     </div>
 
     <nav class="flex-1 flex flex-col divide-gray-800 overflow-y-auto pt-5" aria-label="Sidebar">
@@ -206,8 +407,6 @@
       <% end %>
     </nav>
 
-
-
     <div class="w-full text-center text-sm text-gray-400 space-y-2">
       <p>Copyright &copy Ryan Winchester</p>
       <p>
@@ -220,6 +419,5 @@
         </a>
       </p>
     </div>
-
   </div>
 </div>
