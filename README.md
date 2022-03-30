@@ -26,6 +26,7 @@ Code paste-bin and editor.
 - [x] Deploy
 - [ ] meta/og tags for better links
 - [ ] Mobile sidebar
+- [ ] Overlayed alerts/errors
 
 #### v2.0
 
