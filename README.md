@@ -25,7 +25,7 @@ Code paste-bin and editor.
 - [ ] CI/CD (Github actions)
 - [x] Deploy
 - [ ] meta/og tags for better links
-- [ ] Mobile sidebar
+- [ ] Mobile menus
 - [ ] Overlayed alerts/errors
 
 #### v2.0
@@ -56,3 +56,6 @@ I just want a non-cluttered UI and support for the languages I use.
 - [Phoenix Framework](https://www.phoenixframework.org/)
 - [CodeMirror 6](https://codemirror.net/6)
 - [PostgreSQL](https://www.postgresql.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- See [mix.exs](https://github.com/ryanwinchester/ctrlv/blob/main/mix.exs) deps and [package.json](https://github.com/ryanwinchester/ctrlv/blob/main/assets/package.json) for more.
