@@ -4,8 +4,8 @@ defmodule Ctrlv.MixProject do
   def project do
     [
       app: :ctrlv,
-      version: "0.1.0",
-      elixir: "~> 1.12",
+      version: "0.2.0",
+      elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -67,7 +67,7 @@ defmodule Ctrlv.MixProject do
   defp aliases do
     [
       "assets.install": ["cmd npm install --prefix assets"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"],
+      "assets.deploy": ["tailwind default --minify", "esbuild default", "phx.digest"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       setup: ["deps.get", "ecto.setup"],

@@ -47,6 +47,8 @@ Code paste-bin and editor.
 To be honest, I just don't like most pastebin things for code, and the ones I do
 like don't support Elixir syntax highlighting. That's the reason I started it.
 
+I just want a non-cluttered UI and support for the languages I use.
+
 ### Main technologies:
 
 - [Elixir](https://elixir-lang.org)
