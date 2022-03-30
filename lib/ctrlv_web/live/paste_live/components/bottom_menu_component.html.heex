@@ -12,7 +12,6 @@
             New
           </a>
 
-
           <%= if !@is_editing do %>
             <a href={Routes.paste_editor_path(@socket, :new, @puid)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
               <svg class="mr-2 flex-shrink-0 h-4 w-4 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +48,6 @@
           <% end %>
         </div>
       </div>
-
 
       <%= if @is_editing do %>
         <div class="mt-1">

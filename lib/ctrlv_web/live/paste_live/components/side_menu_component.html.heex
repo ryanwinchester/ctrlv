@@ -2,24 +2,34 @@
   <!-- Static sidebar for desktop -->
   <div class="flex md:w-64 md:flex-col md:fixed md:inset-y-0 right-0 bg-gray-700 overflow-y-auto p-4">
     <div class="keys justify-center">
-        <span class="key">ctrl</span>
-        <span class="key">v</span>
-        <span class="key">.io</span>
+      <span class="key">ctrl</span>
+      <span class="key">v</span>
+      <span class="key">.io</span>
     </div>
 
     <nav class="flex-1 flex flex-col divide-gray-800 overflow-y-auto pt-5" aria-label="Sidebar">
-        <div class="space-y-1 flex justify-center">
-          <a href={Routes.paste_editor_path(@socket, :new)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
-            <!-- Heroicon name: outline/plus-circle -->
-            <svg class="mr-2 flex-shrink-0 h-6 w-6 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            New
-          </a>
+      <div class="space-y-1 flex justify-center">
+        <a href={Routes.paste_editor_path(@socket, :new)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
+          <!-- Heroicon name: outline/plus-circle -->
+          <svg class="mr-2 flex-shrink-0 h-6 w-6 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          New
+        </a>
 
-
-          <%= if !@is_editing do %>
-          <a href={Routes.paste_editor_path(@socket, :new, @puid)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
+        <%= if !@is_editing do %>
+        <a href={Routes.paste_editor_path(@socket, :new, @puid)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
+          <svg class="mr-2 flex-shrink-0 h-5 w-5 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="160" cy="96" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+            <circle cx="160" cy="416" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+            <line x1="160" y1="368" x2="160" y2="144" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+            <circle cx="352" cy="160" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+            <path d="M352,208c0,128-192,48-192,160" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+          </svg>
+          Fork
+        </a>
+        <% else %>
+          <a href='#' class="text-gray-100 cursor-not-allowed opacity-25 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
             <svg class="mr-2 flex-shrink-0 h-5 w-5 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
               <circle cx="160" cy="96" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
               <circle cx="160" cy="416" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
@@ -29,22 +39,8 @@
             </svg>
             Fork
           </a>
-          <% else %>
-            <a href='#' class="text-gray-100 cursor-not-allowed opacity-25 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
-              <svg class="mr-2 flex-shrink-0 h-5 w-5 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="160" cy="96" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-                <circle cx="160" cy="416" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-                <line x1="160" y1="368" x2="160" y2="144" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-                <circle cx="352" cy="160" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-                <path d="M352,208c0,128-192,48-192,160" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-              </svg>
-              Fork
-            </a>
-          <% end %>
-
-        </div>
-
-
+        <% end %>
+      </div>
 
       <%= if @is_editing do %>
         <div class="pt-4 px-1">
