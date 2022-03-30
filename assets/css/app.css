@@ -14,20 +14,11 @@
   color: #545a66;
 }
 
-.kbd {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: .5rem;
-  padding-right: .5rem;
-  min-height: 2.2em;
-  min-width: 2.2em;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.8);
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: var(--rounded-btn,.5rem);
-  border-bottom-width: 2px;
-  line-height: 1.5rem;
-  font-size: 1rem;
+.keys {
+  @apply flex text-white space-x-1;
+}
+
+.keys span {
+  @apply flex items-center justify-center px-3 py-1 border border-black bg-slate-800 rounded-lg text-base border-b-2;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
