@@ -14,6 +14,7 @@ Code paste-bin and editor.
 - [x] CodeMirror 6 languages
 - [x] CodeMirror Legacy languages
 - [x] Elixir language
+- [x] Limit content length
 - [ ] Cache
 - [ ] Rate-limiting `save`
 - [ ] Delete expired pastes
@@ -22,13 +23,16 @@ Code paste-bin and editor.
   * [ ] Credo
   * [ ] Dialyzer
 - [ ] CI/CD (Github actions)
+- [ ] Deploy
+- [ ] meta/og tags for better links
+- [ ] Mobile sidebar
 
 #### v2.0
 
 - [ ] Versions
 - [ ] Advanced settings (`tabSize`, etc)
 - [ ] Help menu
-- [ ] Streaming code updates
+- [ ] Real-time(ish) code updates
 
 #### v3.0 (potential ideas/wishlist for now)
 
@@ -36,6 +40,11 @@ Code paste-bin and editor.
 - [ ] User accounts for non-expiring pastes
 
 ## About
+
+### Why did I make this?
+
+To be honest, I just don't like most pastebin things for code, and the ones I do
+like don't support Elixir syntax highlighting. That's the reason I started it.
 
 ### Main technologies:
 
