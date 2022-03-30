@@ -3,7 +3,8 @@ defmodule CtrlvWeb.PasteLive.Editor do
 
   alias Ctrlv.Pastes
   alias Ctrlv.Pastes.Paste
-  alias CtrlvWeb.PasteLive.SideBarComponent
+  alias CtrlvWeb.PasteLive.BottomMenuComponent
+  alias CtrlvWeb.PasteLive.SideMenuComponent
 
   require Logger
 

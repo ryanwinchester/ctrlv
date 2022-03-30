@@ -6,4 +6,8 @@
   </main>
 </div>
 
-<.live_component module={SideBarComponent} id="sidebar" is_editing={@is_editing} changeset={@changeset} puid={@paste && @paste.puid} />
+<%# Side menu for desktop. %>
+<.live_component module={SideMenuComponent} id="sidebar" is_editing={@is_editing} changeset={@changeset} puid={@paste && @paste.puid} />
+
+<%# Bottom menu for mobile. %>
+<.live_component module={BottomMenuComponent} id="sidebar" is_editing={@is_editing} changeset={@changeset} puid={@paste && @paste.puid} />
