@@ -42,11 +42,21 @@ if config_env() == :prod do
     System.get_env("FLY_APP_NAME") ||
       raise "FLY_APP_NAME not available"
 
-  host = System.get_env("PHX_HOST") || "#{app_name}.fly.dev"
+  phx_host = System.get_env("PHX_HOST")
+  fly_host = "#{app_name}.fly.dev"
+  host = phx_host || fly_host
   port = String.to_integer(System.get_env("PORT") || "4000")
+
+  check_origins =
+    if phx_host do
+      ["https://" <> phx_host, "https://" <> fly_host]
+    else
+      ["https://" <> host]
+    end
 
   config :ctrlv, CtrlvWeb.Endpoint,
     url: [host: host, port: 443],
+    check_origin: check_origins,
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
