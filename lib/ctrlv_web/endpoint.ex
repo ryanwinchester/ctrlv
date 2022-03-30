@@ -19,7 +19,7 @@ defmodule CtrlvWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :ctrlv,
-    gzip: false,
+    gzip: true,
     only: ~w(assets fonts images favicon.svg robots.txt)
 
   # Code reloading can be explicitly enabled under the

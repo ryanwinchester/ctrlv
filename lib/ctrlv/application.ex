@@ -39,6 +39,6 @@ defmodule Ctrlv.Application do
 
   # Get the schedules that should run.
   defp schedules do
-    Application.fetch_env!(@app, Schedex) |> Keyword.fetch!(:schedules)
+    Application.fetch_env!(@app, SchedEx) |> Keyword.fetch!(:schedules)
   end
 end
