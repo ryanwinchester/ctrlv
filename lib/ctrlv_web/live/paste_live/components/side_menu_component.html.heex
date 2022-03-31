@@ -15,7 +15,7 @@
         New
       </a>
 
-      <%= if !@is_editing do %>
+      <%= if not @is_editing do %>
       <a href={Routes.paste_editor_path(@socket, :new, @puid)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
         <svg class="mr-2 flex-shrink-0 h-5 w-5 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
           <circle cx="160" cy="96" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
