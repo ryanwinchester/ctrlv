@@ -70,7 +70,7 @@ defmodule Ctrlv.MixProject do
       "assets.deploy": ["tailwind default --minify", "esbuild default", "phx.digest"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      setup: ["deps.get", "ecto.setup"],
+      setup: ["deps.get", "assets.install", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
     ]
   end
