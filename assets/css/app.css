@@ -5,13 +5,7 @@
 
 /* This accounts for the fixed bottom menu on smaller screens */
 .cm-editor {
-  height: calc(100vh - 130px);
-}
-
-@media (min-width: 768px) {
- .cm-editor {
-    height: calc(100vh - 25px);
-  } 
+  @apply h-full;
 }
 
 .cm-editor .cm-scroller {

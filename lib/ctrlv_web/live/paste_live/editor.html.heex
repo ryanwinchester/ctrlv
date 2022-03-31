@@ -1,13 +1,17 @@
-<div class="md:pr-64 flex flex-col flex-1">
-  <main class="flex-1 pb-8">
-    <div class="editor-wrapper h-full w-full">
-      <div id="editor" class="h-full" phx-hook="Editor" data-is-editing={to_string(@is_editing)} phx-update="ignore"></div>
+<div class="flex flex-col h-screen">
+  <div class="flex-1 overflow-hidden">
+
+    <div class="flex h-full">
+      
+      <div class="flex-1 w-full md:h-screen overflow-x-auto whitespace-nowrap pr-1" id="editor" phx-hook="Editor" data-is-editing={to_string(@is_editing)} phx-update="ignore"></div>
+
+      <div class="hidden md:block w-64 overflow-auto">
+        <.live_component module={SideMenuComponent} id="sidebar" is_editing={@is_editing} changeset={@changeset} puid={@paste && @paste.puid} />
+      </div>
     </div>
-  </main>
+  </div>
+
+  <div class="md:hidden bg-gray-700 p-2">
+    <.live_component module={BottomMenuComponent} id="footer" is_editing={@is_editing} changeset={@changeset} puid={@paste && @paste.puid} />
+  </div>
 </div>
-
-<%# Side menu for desktop. %>
-<.live_component module={SideMenuComponent} id="sidebar" is_editing={@is_editing} changeset={@changeset} puid={@paste && @paste.puid} />
-
-<%# Bottom menu for mobile. %>
-<.live_component module={BottomMenuComponent} id="sidebar" is_editing={@is_editing} changeset={@changeset} puid={@paste && @paste.puid} />
