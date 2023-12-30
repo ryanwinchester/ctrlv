@@ -1,14 +1,15 @@
 <div class="flex flex-col h-screen">
   <div class="flex-1 overflow-hidden">
     <div class="flex h-full">
-      <div
-        id="editor"
-        class="flex-1 w-full md:h-screen overflow-x-auto whitespace-nowrap pr-1"
-        phx-hook="Editor"
-        phx-update="ignore"
-        data-is-editing={to_string(@is_editing)}
-      >
-      </div>
+      <form class="flex-1 w-full md:h-screen overflow-x-auto whitespace-nowrap pr-1">
+        <LiveMonacoEditor.code_editor
+          style="min-height: 250px; width: 100%;"
+          value={@paste && @paste.content}
+          opts={@editor_opts}
+          change="set_editor_value"
+          autofocus={true}
+        />
+      </form>
 
       <div class="hidden md:block w-64 overflow-auto">
         <.live_component

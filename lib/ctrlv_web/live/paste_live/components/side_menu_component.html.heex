@@ -31,8 +31,8 @@
       </a>
 
       <%= if not @is_editing do %>
-        <a
-          href={~p"/#{@puid}/fork"}
+        <.link
+          navigate={~p"/#{@puid}/fork"}
           class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md"
         >
           <svg
@@ -73,7 +73,7 @@
             />
           </svg>
           Fork
-        </a>
+        </.link>
       <% else %>
         <a
           href="#"
@@ -123,7 +123,7 @@
 
     <%= if @is_editing do %>
       <div class="pt-4 px-1">
-        <.form :let={f} for={@changeset} phx-change="form-change" phx-submit="save">
+        <.form :let={f} for={@changeset} phx-change="form-change" phx-submit="save-paste">
           <div class="space-y-2">
             <div>
               <%= label(f, :language, class: "block text-sm font-medium text-gray-300") %>
@@ -281,7 +281,7 @@
           <button
             class="flex w-full items-center px-4 py-2 justify-center border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             aria-current="page"
-            phx-click="init-save"
+            phx-click="save-paste"
           >
             <!-- Heroicon name: outline/save -->
             <svg

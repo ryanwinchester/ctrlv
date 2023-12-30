@@ -2,9 +2,11 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import "../../deps/live_monaco_editor/priv/static/live_monaco_editor.min.css";
+
 
 /* This accounts for the fixed bottom menu on smaller screens */
-.cm-editor {
+/* .cm-editor {
   @apply h-full;
 }
 
@@ -14,7 +16,7 @@
 
 .cm-editor .cm-gutters {
   color: #545a66;
-}
+} */
 
 .keys {
   @apply flex text-white space-x-1;
