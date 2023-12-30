@@ -22,7 +22,7 @@ defmodule Ctrlv.Pastes.Paste do
   schema "pastes" do
     field :puid, :string
     field :content_sha, :string
-    field :content, {:array, {:array, :string}}
+    field :content, :string
     field :language, Ecto.Enum, values: Language.list()
     field :expires_at, :utc_datetime
 

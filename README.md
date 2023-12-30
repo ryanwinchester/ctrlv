@@ -48,7 +48,8 @@ Use the `Dockerfile` to build an image and deploy it.
 
 #### v2.0
 
-- [ ] Improve/fix "flash" between `show` and `fork`
+- [x] Monaco editor
+- [x] Improve/fix "flash" between `show` and `fork`
 - [ ] Versions
 - [ ] Advanced settings (`tabSize`, etc)
 - [ ] Help menu
@@ -56,7 +57,6 @@ Use the `Dockerfile` to build an image and deploy it.
 
 #### v3.0 (potential ideas/wishlist for now)
 
-- [ ] Monaco editor
 - [ ] User accounts for non-expiring pastes
 
 ## About
@@ -72,7 +72,7 @@ I just want a non-cluttered UI and support for the languages I use.
 
 - [Elixir](https://elixir-lang.org)
 - [Phoenix Framework](https://www.phoenixframework.org/)
-- [CodeMirror 6](https://codemirror.net/6)
+- [Monaco Editor](https://github.com/microsoft/monaco-editor)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)

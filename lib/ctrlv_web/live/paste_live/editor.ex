@@ -8,6 +8,8 @@ defmodule CtrlvWeb.PasteLive.Editor do
 
   require Logger
 
+  @default_language "javascript"
+
   # ----------------------------------------------------------------------------
   # LiveView Callbacks
   # ----------------------------------------------------------------------------
@@ -23,41 +25,39 @@ defmodule CtrlvWeb.PasteLive.Editor do
   end
 
   @impl true
-  def handle_event("editor-created", _params, socket) do
-    doc = socket.assigns[:paste] && List.first(socket.assigns.paste.content)
-    language = socket.assigns[:paste] && socket.assigns.paste.language
-    {:reply, %{doc: doc, language: language}, socket}
-  end
-
   def handle_event("form-change", %{"paste" => paste_attrs}, socket) do
     changeset = Pastes.change_paste(%Paste{}, paste_attrs)
     language = changeset.changes.language
 
     {:noreply,
      socket
-     |> assign(:changeset, changeset)
-     |> push_event("switch-language", %{language: language})}
+     |> LiveMonacoEditor.change_language(to_string(language))
+     |> assign(:changeset, changeset)}
   end
 
-  def handle_event("init-save", _params, socket) do
-    Logger.debug("[PasteLive.Editor] initiating save...")
-    {:noreply, push_event(socket, "init-save-paste", %{})}
-  end
-
-  def handle_event("save-paste", %{"doc" => doc}, socket) do
-    changeset = Pastes.change_paste(socket.assigns.changeset, %{content: [doc]})
+  def handle_event("save-paste", _params, socket) do
+    changeset = Pastes.change_paste(socket.assigns.changeset, %{content: socket.assigns.content})
 
     case Pastes.create_paste(changeset) do
       {:ok, paste} ->
         {:noreply,
          socket
          |> put_flash(:success, "created paste")
-         |> push_redirect(to: ~p"/#{paste.puid}")}
+         |> push_navigate(to: ~p"/#{paste.puid}")}
 
       {:error, changeset} ->
         Logger.debug(inspect(changeset))
         {:noreply, assign(socket, :changeset, changeset)}
     end
+  end
+
+  # ignore change events from the editor field
+  def handle_event("validate", %{"_target" => ["live_monaco_editor", "my_file.html"]}, socket) do
+    {:noreply, socket}
+  end
+
+  def handle_event("set_editor_value", %{"value" => value}, socket) do
+    {:noreply, assign(socket, :content, value)}
   end
 
   # ----------------------------------------------------------------------------
@@ -66,20 +66,27 @@ defmodule CtrlvWeb.PasteLive.Editor do
 
   defp apply_action(socket, :new, params) do
     paste = params["puid"] && Pastes.get_active_paste_by_puid!(params["puid"])
+    language = if paste, do: to_string(paste.language), else: @default_language
+    editor_opts = editor_opts(%{"language" => language, "readOnly" => false})
 
     socket
     |> assign(:page_title, "New Paste")
     |> assign(:is_editing, true)
     |> assign(:paste, paste)
+    |> assign(:editor_opts, editor_opts)
     |> assign(:changeset, changeset(:new, paste))
   end
 
   defp apply_action(socket, :show, %{"puid" => puid}) do
+    paste = Pastes.get_active_paste_by_puid!(puid)
+    editor_opts = editor_opts(%{"language" => to_string(paste.language), "readOnly" => true})
+
     socket
     |> assign(:page_title, "View Paste")
     |> assign(:is_editing, false)
+    |> assign(:editor_opts, editor_opts)
     |> assign(:changeset, nil)
-    |> assign(:paste, Pastes.get_active_paste_by_puid!(puid))
+    |> assign(:paste, paste)
   end
 
   defp changeset(:new, %Paste{} = paste) do
@@ -91,5 +98,9 @@ defmodule CtrlvWeb.PasteLive.Editor do
 
   defp changeset(:new, nil) do
     Pastes.change_paste(%Paste{}, %{language: :javascript, expires_in: "1_day"})
+  end
+
+  defp editor_opts(opts) do
+    Map.merge(LiveMonacoEditor.default_opts(), opts)
   end
 end

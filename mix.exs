@@ -55,6 +55,7 @@ defmodule Ctrlv.MixProject do
       # Additional libraries.
       {:puid, "~> 1.0"},
       {:sched_ex, "~> 1.0"},
+      {:live_monaco_editor, "~> 0.1"},
 
       # For backwards compatibility...
       {:phoenix_html_helpers, "~> 1.0.1"}
