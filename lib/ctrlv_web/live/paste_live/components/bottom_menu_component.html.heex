@@ -1,33 +1,114 @@
 <div>
   <div class="flex">
     <div class="grow flex">
-      <a href={Routes.paste_editor_path(@socket, :new)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-1 px-2 text-sm leading-6 font-medium rounded-md">
+      <a
+        href={~p"/new"}
+        class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-1 px-2 text-sm leading-6 font-medium rounded-md"
+      >
         <!-- Heroicon name: outline/plus-circle -->
-        <svg class="mr-2 flex-shrink-0 h-4 w-4 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        <svg
+          class="mr-2 flex-shrink-0 h-4 w-4 text-gray-200"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+          >
+          </path>
         </svg>
         New
       </a>
 
       <%= if not @is_editing do %>
-        <a href={Routes.paste_editor_path(@socket, :new, @puid)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
-          <svg class="mr-2 flex-shrink-0 h-4 w-4 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="160" cy="96" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-            <circle cx="160" cy="416" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-            <line x1="160" y1="368" x2="160" y2="144" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-            <circle cx="352" cy="160" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-            <path d="M352,208c0,128-192,48-192,160" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+        <a
+          href={~p"/#{@puid}/fork"}
+          class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md"
+        >
+          <svg
+            class="mr-2 flex-shrink-0 h-4 w-4 text-gray-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="160"
+              cy="96"
+              r="48"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <circle
+              cx="160"
+              cy="416"
+              r="48"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <line
+              x1="160"
+              y1="368"
+              x2="160"
+              y2="144"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <circle
+              cx="352"
+              cy="160"
+              r="48"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <path
+              d="M352,208c0,128-192,48-192,160"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
           </svg>
           Fork
         </a>
       <% else %>
-        <a href='#' class="text-gray-100 cursor-not-allowed opacity-25 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
-          <svg class="mr-2 flex-shrink-0 h-4 w-4 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="160" cy="96" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-            <circle cx="160" cy="416" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-            <line x1="160" y1="368" x2="160" y2="144" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-            <circle cx="352" cy="160" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-            <path d="M352,208c0,128-192,48-192,160" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+        <a
+          href="#"
+          class="text-gray-100 cursor-not-allowed opacity-25 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md"
+        >
+          <svg
+            class="mr-2 flex-shrink-0 h-4 w-4 text-gray-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="160"
+              cy="96"
+              r="48"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <circle
+              cx="160"
+              cy="416"
+              r="48"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <line
+              x1="160"
+              y1="368"
+              x2="160"
+              y2="144"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <circle
+              cx="352"
+              cy="160"
+              r="48"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <path
+              d="M352,208c0,128-192,48-192,160"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
           </svg>
           Fork
         </a>
@@ -35,10 +116,26 @@
     </div>
     <div class="shrink">
       <%= if @is_editing do %>
-        <button class="flex items-center px-4 py-2 justify-center border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-current="page" phx-click="init-save">
+        <button
+          class="flex items-center px-4 py-2 justify-center border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          aria-current="page"
+          phx-click="init-save"
+        >
           <!-- Heroicon name: outline/save -->
-          <svg class="mr-2 flex-shrink-0 h-5 w-5 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+          <svg
+            class="mr-2 flex-shrink-0 h-5 w-5 text-gray-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+            >
+            </path>
           </svg>
           Save
         </button>
@@ -48,11 +145,16 @@
 
   <%= if @is_editing do %>
     <div class="mt-1">
-      <.form let={f} for={@changeset} phx-change="form-change" phx-submit="save">
+      <.form :let={f} for={@changeset} phx-change="form-change" phx-submit="save">
         <div class="space-y-2">
           <div class="flex items-center">
-            <%= label f, :language, class: "text-sm font-medium text-gray-300 w-24 text-right pr-2" %>
-            <%= select f, :language, [
+            <%= label(f, :language,
+              class: "text-sm font-medium text-gray-300 w-24 text-right pr-2"
+            ) %>
+            <%= select(
+              f,
+              :language,
+              [
                 [key: "C++", value: "cpp"],
                 [key: "CSS", value: "css"],
                 [key: "HTML", value: "html"],
@@ -171,13 +273,19 @@
                 [key: "z80", value: "z80"]
               ],
               prompt: [key: "Select language", disabled: true],
-              class: "block w-full pl-2 pr-10 py-1 text-sm text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
-            %>
+              class:
+                "block w-full pl-2 pr-10 py-1 text-sm text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
+            ) %>
           </div>
 
           <div class="flex items-center">
-            <%= label f, :expires_in, "Expires", class: "text-sm font-medium text-gray-300 w-24 text-right pr-2" %>
-            <%= select f, :expires_in, [
+            <%= label(f, :expires_in, "Expires",
+              class: "text-sm font-medium text-gray-300 w-24 text-right pr-2"
+            ) %>
+            <%= select(
+              f,
+              :expires_in,
+              [
                 "10 minutes": "10_minutes",
                 "1 hour": "1_hour",
                 "1 day": "1_day",
@@ -186,8 +294,9 @@
                 "1 month": "1_month"
               ],
               prompt: [key: "Select expiry", disabled: true],
-              class: "block w-full pl-2 pr-10 py-1 text-sm text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
-            %>
+              class:
+                "block w-full pl-2 pr-10 py-1 text-sm text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
+            ) %>
           </div>
         </div>
       </.form>

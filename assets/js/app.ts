@@ -14,7 +14,7 @@ declare global {
 }
 
 // CSRF token.
-let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+let csrfToken = document.querySelector("meta[name='csrf-token']")?.getAttribute("content");
 
 // Live Socket.
 let liveSocket = new LiveSocket("/live", Socket, {

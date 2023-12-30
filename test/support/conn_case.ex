@@ -19,15 +19,15 @@ defmodule CtrlvWeb.ConnCase do
 
   using do
     quote do
+      # The default endpoint for testing
+      @endpoint CtrlvWeb.Endpoint
+
+      use CtrlvWebWeb, :verified_routes
+
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
       import CtrlvWeb.ConnCase
-
-      alias CtrlvWeb.Router.Helpers, as: Routes
-
-      # The default endpoint for testing
-      @endpoint CtrlvWeb.Endpoint
     end
   end
 

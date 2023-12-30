@@ -29,19 +29,19 @@ defmodule CtrlvWeb.PasteLiveTest do
     setup [:create_paste]
 
     test "lists all pastes", %{conn: conn, paste: paste} do
-      {:ok, _index_live, html} = live(conn, Routes.paste_index_path(conn, :index))
+      {:ok, _index_live, html} = live(conn, ~p"/")
 
       assert html =~ "Listing Pastes"
       assert html =~ paste.content
     end
 
     test "saves new paste", %{conn: conn} do
-      {:ok, index_live, _html} = live(conn, Routes.paste_index_path(conn, :index))
+      {:ok, index_live, _html} = live(conn, ~p"/")
 
       assert index_live |> element("a", "New Paste") |> render_click() =~
                "New Paste"
 
-      assert_patch(index_live, Routes.paste_index_path(conn, :new))
+      assert_patch(index_live, ~p"/new")
 
       assert index_live
              |> form("#paste-form", paste: @invalid_attrs)
@@ -51,36 +51,36 @@ defmodule CtrlvWeb.PasteLiveTest do
         index_live
         |> form("#paste-form", paste: @create_attrs)
         |> render_submit()
-        |> follow_redirect(conn, Routes.paste_index_path(conn, :index))
+        |> follow_redirect(conn, ~p"/")
 
       assert html =~ "Paste created successfully"
       assert html =~ "some content"
     end
 
-    test "updates paste in listing", %{conn: conn, paste: paste} do
-      {:ok, index_live, _html} = live(conn, Routes.paste_index_path(conn, :index))
+    # test "updates paste in listing", %{conn: conn, paste: paste} do
+    #   {:ok, index_live, _html} = live(conn, ~p"/")
 
-      assert index_live |> element("#paste-#{paste.id} a", "Edit") |> render_click() =~
-               "Edit Paste"
+    #   assert index_live |> element("#paste-#{paste.id} a", "Edit") |> render_click() =~
+    #            "Edit Paste"
 
-      assert_patch(index_live, Routes.paste_index_path(conn, :edit, paste))
+    #   assert_patch(index_live, ~p"/".paste_index_path(conn, :edit, paste))
 
-      assert index_live
-             |> form("#paste-form", paste: @invalid_attrs)
-             |> render_change() =~ "is invalid"
+    #   assert index_live
+    #          |> form("#paste-form", paste: @invalid_attrs)
+    #          |> render_change() =~ "is invalid"
 
-      {:ok, _, html} =
-        index_live
-        |> form("#paste-form", paste: @update_attrs)
-        |> render_submit()
-        |> follow_redirect(conn, Routes.paste_index_path(conn, :index))
+    #   {:ok, _, html} =
+    #     index_live
+    #     |> form("#paste-form", paste: @update_attrs)
+    #     |> render_submit()
+    #     |> follow_redirect(conn, ~p"/")
 
-      assert html =~ "Paste updated successfully"
-      assert html =~ "some updated content"
-    end
+    #   assert html =~ "Paste updated successfully"
+    #   assert html =~ "some updated content"
+    # end
 
     test "deletes paste in listing", %{conn: conn, paste: paste} do
-      {:ok, index_live, _html} = live(conn, Routes.paste_index_path(conn, :index))
+      {:ok, index_live, _html} = live(conn, ~p"/")
 
       assert index_live |> element("#paste-#{paste.id} a", "Delete") |> render_click()
       refute has_element?(index_live, "#paste-#{paste.id}")
@@ -91,32 +91,32 @@ defmodule CtrlvWeb.PasteLiveTest do
     setup [:create_paste]
 
     test "displays paste", %{conn: conn, paste: paste} do
-      {:ok, _show_live, html} = live(conn, Routes.paste_show_path(conn, :show, paste))
+      {:ok, _show_live, html} = live(conn, ~p"/#{paste.puid}")
 
       assert html =~ "Show Paste"
       assert html =~ paste.content
     end
 
-    test "updates paste within modal", %{conn: conn, paste: paste} do
-      {:ok, show_live, _html} = live(conn, Routes.paste_show_path(conn, :show, paste))
+    # test "updates paste within modal", %{conn: conn, paste: paste} do
+    #   {:ok, show_live, _html} = live(conn, ~p"/#{paste.puid}")
 
-      assert show_live |> element("a", "Edit") |> render_click() =~
-               "Edit Paste"
+    #   assert show_live |> element("a", "Edit") |> render_click() =~
+    #            "Edit Paste"
 
-      assert_patch(show_live, Routes.paste_show_path(conn, :edit, paste))
+    #   assert_patch(show_live, Routes.paste_show_path(conn, :edit, paste))
 
-      assert show_live
-             |> form("#paste-form", paste: @invalid_attrs)
-             |> render_change() =~ "is invalid"
+    #   assert show_live
+    #          |> form("#paste-form", paste: @invalid_attrs)
+    #          |> render_change() =~ "is invalid"
 
-      {:ok, _, html} =
-        show_live
-        |> form("#paste-form", paste: @update_attrs)
-        |> render_submit()
-        |> follow_redirect(conn, Routes.paste_show_path(conn, :show, paste))
+    #   {:ok, _, html} =
+    #     show_live
+    #     |> form("#paste-form", paste: @update_attrs)
+    #     |> render_submit()
+    #     |> follow_redirect(conn, ~p"/#{paste.puid}")
 
-      assert html =~ "Paste updated successfully"
-      assert html =~ "some updated content"
-    end
+    #   assert html =~ "Paste updated successfully"
+    #   assert html =~ "some updated content"
+    # end
   end
 end

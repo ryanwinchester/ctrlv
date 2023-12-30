@@ -52,7 +52,7 @@ defmodule CtrlvWeb.PasteLive.Editor do
         {:noreply,
          socket
          |> put_flash(:success, "created paste")
-         |> push_redirect(to: Routes.paste_editor_path(socket, :show, paste.puid))}
+         |> push_redirect(to: ~p"/#{paste.puid}")}
 
       {:error, changeset} ->
         Logger.debug(inspect(changeset))

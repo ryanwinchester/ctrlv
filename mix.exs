@@ -5,7 +5,7 @@ defmodule Ctrlv.MixProject do
     [
       app: :ctrlv,
       version: "0.2.1",
-      elixir: "~> 1.13",
+      elixir: "~> 1.15",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -33,27 +33,31 @@ defmodule Ctrlv.MixProject do
   defp deps do
     [
       # Application defaults.
-      {:phoenix, "~> 1.6.6"},
+      {:phoenix, "~> 1.7.1"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 3.0"},
+      {:phoenix_html, "~> 4.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.17.5"},
+      {:phoenix_live_view, "~> 0.19"},
       {:floki, ">= 0.30.0", only: :test},
-      {:phoenix_live_dashboard, "~> 0.6"},
-      {:esbuild, "~> 0.3", runtime: Mix.env() == :dev},
+      {:phoenix_live_dashboard, "~> 0.7"},
+      {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.1.8", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
-      {:gettext, "~> 0.18"},
+      {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"},
+      # {:plug_cowboy, "~> 2.5"},
+      {:bandit, "~> 1.0"},
 
       # Additional libraries.
       {:puid, "~> 1.0"},
       {:sched_ex, "~> 1.0"},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
+
+      # For backwards compatibility...
+      {:phoenix_html_helpers, "~> 1.0.1"}
     ]
   end
 

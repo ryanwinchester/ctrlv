@@ -1,6 +1,5 @@
 defmodule CtrlvWeb.LiveHelpers do
-  import Phoenix.LiveView
-  import Phoenix.LiveView.Helpers
+  use CtrlvWeb, :live_component
 
   alias Phoenix.LiveView.JS
 
@@ -35,16 +34,19 @@ defmodule CtrlvWeb.LiveHelpers do
         phx-window-keydown={JS.dispatch("click", to: "#close")}
         phx-key="escape"
       >
-        <%= if @return_to do %>
-          <%= live_patch "✖",
-            to: @return_to,
-            id: "close",
-            class: "phx-modal-close",
-            phx_click: hide_modal()
-          %>
-        <% else %>
-         <a id="close" href="#" class="phx-modal-close" phx-click={hide_modal()}>✖</a>
-        <% end %>
+        <.link
+          :if={@return_to}
+          patch={@return_to}
+          id="close"
+          class="phx-modal-close"
+          phx-click={hide_modal()}
+        >
+          ✖
+        </.link>
+
+        <a :if={!@return_to} id="close" href="#" class="phx-modal-close" phx-click={hide_modal()}>
+          ✖
+        </a>
 
         <%= render_slot(@inner_block) %>
       </div>

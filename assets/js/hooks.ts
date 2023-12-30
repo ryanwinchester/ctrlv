@@ -22,5 +22,7 @@ export const Editor = {
     this.handleEvent("init-save-paste", () => {
       this.pushEvent("save-paste", {doc: editorView.state.doc.toJSON()});
     });
+
+    editorView.focus();
   },
 };

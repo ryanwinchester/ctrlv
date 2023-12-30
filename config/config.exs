@@ -13,6 +13,7 @@ config :ctrlv,
 
 # Configures the endpoint
 config :ctrlv, CtrlvWeb.Endpoint,
+  adapter: Bandit.PhoenixAdapter,
   url: [host: "localhost"],
   render_errors: [view: CtrlvWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Ctrlv.PubSub,
@@ -39,7 +40,7 @@ config :swoosh, :api_client, false
 
 # Configure esbuild (the version is required)
 config :esbuild,
-  version: "0.14.29",
+  version: "0.14.41",
   default: [
     args:
       ~w(js/app.ts --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
@@ -48,7 +49,7 @@ config :esbuild,
   ]
 
 config :tailwind,
-  version: "3.0.23",
+  version: "3.2.4",
   default: [
     args: ~w(
       --config=tailwind.config.js

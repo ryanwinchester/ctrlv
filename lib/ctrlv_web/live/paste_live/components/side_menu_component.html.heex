@@ -7,33 +7,114 @@
 
   <div class="flex-1 flex flex-col divide-gray-800 pt-5" aria-label="Sidebar">
     <div class="space-y-1 flex justify-center">
-      <a href={Routes.paste_editor_path(@socket, :new)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
+      <a
+        href={~p"/new"}
+        class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md"
+      >
         <!-- Heroicon name: outline/plus-circle -->
-        <svg class="mr-2 flex-shrink-0 h-6 w-6 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        <svg
+          class="mr-2 flex-shrink-0 h-6 w-6 text-gray-200"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+          >
+          </path>
         </svg>
         New
       </a>
 
       <%= if not @is_editing do %>
-      <a href={Routes.paste_editor_path(@socket, :new, @puid)} class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
-        <svg class="mr-2 flex-shrink-0 h-5 w-5 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="160" cy="96" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-          <circle cx="160" cy="416" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-          <line x1="160" y1="368" x2="160" y2="144" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-          <circle cx="352" cy="160" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-          <path d="M352,208c0,128-192,48-192,160" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-        </svg>
-        Fork
-      </a>
+        <a
+          href={~p"/#{@puid}/fork"}
+          class="text-gray-100 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md"
+        >
+          <svg
+            class="mr-2 flex-shrink-0 h-5 w-5 text-gray-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="160"
+              cy="96"
+              r="48"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <circle
+              cx="160"
+              cy="416"
+              r="48"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <line
+              x1="160"
+              y1="368"
+              x2="160"
+              y2="144"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <circle
+              cx="352"
+              cy="160"
+              r="48"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <path
+              d="M352,208c0,128-192,48-192,160"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+          </svg>
+          Fork
+        </a>
       <% else %>
-        <a href='#' class="text-gray-100 cursor-not-allowed opacity-25 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md">
-          <svg class="mr-2 flex-shrink-0 h-5 w-5 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="160" cy="96" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-            <circle cx="160" cy="416" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-            <line x1="160" y1="368" x2="160" y2="144" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-            <circle cx="352" cy="160" r="48" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
-            <path d="M352,208c0,128-192,48-192,160" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+        <a
+          href="#"
+          class="text-gray-100 cursor-not-allowed opacity-25 hover:text-white hover:bg-gray-600 group flex items-center py-2 px-4 text-sm leading-6 font-medium rounded-md"
+        >
+          <svg
+            class="mr-2 flex-shrink-0 h-5 w-5 text-gray-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="160"
+              cy="96"
+              r="48"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <circle
+              cx="160"
+              cy="416"
+              r="48"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <line
+              x1="160"
+              y1="368"
+              x2="160"
+              y2="144"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <circle
+              cx="352"
+              cy="160"
+              r="48"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <path
+              d="M352,208c0,128-192,48-192,160"
+              style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
           </svg>
           Fork
         </a>
@@ -42,11 +123,14 @@
 
     <%= if @is_editing do %>
       <div class="pt-4 px-1">
-        <.form let={f} for={@changeset} phx-change="form-change" phx-submit="save">
+        <.form :let={f} for={@changeset} phx-change="form-change" phx-submit="save">
           <div class="space-y-2">
             <div>
-              <%= label f, :language, class: "block text-sm font-medium text-gray-300" %>
-              <%= select f, :language, [
+              <%= label(f, :language, class: "block text-sm font-medium text-gray-300") %>
+              <%= select(
+                f,
+                :language,
+                [
                   [key: "C++", value: "cpp"],
                   [key: "CSS", value: "css"],
                   [key: "HTML", value: "html"],
@@ -165,13 +249,19 @@
                   [key: "z80", value: "z80"]
                 ],
                 prompt: [key: "Select language", disabled: true],
-                class: "mt-1 block w-full pl-3 pr-10 py-2 text-base text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
-              %>
+                class:
+                  "mt-1 block w-full pl-3 pr-10 py-2 text-base text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
+              ) %>
             </div>
 
             <div>
-              <%= label f, :expires_in, "Expires", class: "block text-sm font-medium text-gray-300" %>
-              <%= select f, :expires_in, [
+              <%= label(f, :expires_in, "Expires",
+                class: "block text-sm font-medium text-gray-300"
+              ) %>
+              <%= select(
+                f,
+                :expires_in,
+                [
                   "10 minutes": "10_minutes",
                   "1 hour": "1_hour",
                   "1 day": "1_day",
@@ -180,17 +270,34 @@
                   "1 month": "1_month"
                 ],
                 prompt: [key: "Select expiry", disabled: true],
-                class: "mt-1 block w-full pl-3 pr-10 py-2 text-base text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
-              %>
+                class:
+                  "mt-1 block w-full pl-3 pr-10 py-2 text-base text-gray-200 border-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-600"
+              ) %>
             </div>
           </div>
         </.form>
 
         <div class="pt-6">
-          <button class="flex w-full items-center px-4 py-2 justify-center border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-current="page" phx-click="init-save">
+          <button
+            class="flex w-full items-center px-4 py-2 justify-center border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            aria-current="page"
+            phx-click="init-save"
+          >
             <!-- Heroicon name: outline/save -->
-            <svg class="mr-2 flex-shrink-0 h-6 w-6 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+            <svg
+              class="mr-2 flex-shrink-0 h-6 w-6 text-gray-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+              >
+              </path>
             </svg>
             Save
           </button>
@@ -201,9 +308,15 @@
 
   <div class="text-center text-gray-400 pt-8">
     <a href="https://github.com/ryanwinchester/ctrlv" target="_blank">
-      <svg class="w-6 h-6 inline-flex mr-1" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        class="w-6 h-6 inline-flex mr-1"
+        fill="currentColor"
+        role="img"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <title>GitHub</title>
-        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
       </svg>
       <span class="hover:underline">Open Source</span>
     </a>
