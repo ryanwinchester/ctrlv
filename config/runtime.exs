@@ -56,7 +56,7 @@ if config_env() == :prod do
     end
 
   config :ctrlv, CtrlvWeb.Endpoint,
-    url: [host: host, port: 443],
+    url: [host: host, port: 443, scheme: "https"],
     check_origin: check_origins,
     http: [
       # Enable IPv6 and bind on all interfaces.
