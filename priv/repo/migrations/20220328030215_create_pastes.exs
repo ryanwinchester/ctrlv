@@ -8,7 +8,7 @@ defmodule Ctrlv.Repo.Migrations.CreatePastes do
       add :content, :string, null: false
       add :language, :string, null: false
       add :expires_at, :utc_datetime
-      timestamps()
+      timestamps(updated_at: false)
     end
 
     create unique_index(:pastes, [:puid])

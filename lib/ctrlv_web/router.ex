@@ -25,9 +25,11 @@ defmodule CtrlvWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", CtrlvWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", CtrlvWeb do
+    pipe_through [:api]
+
+    post "/paste", PasteController, :create
+  end
 
   # Enables LiveDashboard only for development
   #

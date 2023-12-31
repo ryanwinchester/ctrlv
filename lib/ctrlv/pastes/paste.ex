@@ -15,8 +15,7 @@ defmodule Ctrlv.Pastes.Paste do
           language: atom(),
           expires_at: DateTime.t(),
           expires_in: String.t() | nil,
-          inserted_at: DateTime.t(),
-          updated_at: DateTime.t()
+          inserted_at: DateTime.t()
         }
 
   schema "pastes" do
@@ -27,16 +26,23 @@ defmodule Ctrlv.Pastes.Paste do
     field :expires_at, :utc_datetime
 
     field :expires_in, Ecto.Enum,
-      values: ~w(10_minutes 1_hour 1_day 3_days 1_week 1_month")a,
+      values: ~w(10_minutes 1_hour 1_day 3_days 1_week 1_month)a,
       virtual: true
 
-    timestamps()
+    timestamps(updated_at: false)
+  end
+
+  @doc """
+  The valid `expires_in` values.
+  """
+  def expires_in_values do
+    Ecto.Enum.dump_values(Ctrlv.Pastes.Paste, :expires_in)
   end
 
   @doc false
   def changeset(paste, attrs) do
     paste
-    |> cast(attrs, [:content, :expires_in, :language])
+    |> cast(attrs, [:content, :expires_in, :language], message: &cast_error_message/2)
     |> validate_length(:content, greater_than_or_equal_to: 1)
     |> validate_required([:expires_in, :language])
     |> put_expires_at()
@@ -45,7 +51,13 @@ defmodule Ctrlv.Pastes.Paste do
     |> unique_constraint(:content_sha, message: "duplicate content")
   end
 
-  def put_expires_at(changeset) do
+  defp cast_error_message(:expires_in, _error_metadata) do
+    "must be one of: " <> Enum.join(expires_in_values(), ", ")
+  end
+
+  defp cast_error_message(_field, _error_metadata), do: "is invalid"
+
+  defp put_expires_at(changeset) do
     case get_change(changeset, :expires_in) do
       nil ->
         changeset
