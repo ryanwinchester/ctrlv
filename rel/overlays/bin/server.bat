@@ -1,2 +1,2 @@
-set PHX_SERVER=true
+set CTRLV_SERVER=true
 call "%~dp0\ctrlv" start

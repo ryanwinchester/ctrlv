@@ -8,7 +8,7 @@ import Config
 # The block below contains prod specific runtime configuration.
 
 # Start the phoenix server if environment is set and running in a release
-if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
+if System.get_env("CTRLV_SERVER") && System.get_env("RELEASE_NAME") do
   config :ctrlv, CtrlvWeb.Endpoint, server: true
 end
 
@@ -43,7 +43,7 @@ if config_env() == :prod do
     System.get_env("FLY_APP_NAME") ||
       raise "FLY_APP_NAME not available"
 
-  phx_host = System.get_env("PHX_HOST")
+  phx_host = System.get_env("CTRLV_HOST")
   fly_host = "#{app_name}.fly.dev"
   host = phx_host || fly_host
   port = String.to_integer(System.get_env("PORT") || "4000")
