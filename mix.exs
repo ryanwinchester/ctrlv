@@ -57,6 +57,11 @@ defmodule Ctrlv.MixProject do
       {:sched_ex, "~> 1.0"},
       {:live_monaco_editor, "~> 0.1"},
 
+      # Code images.
+      {:silicon, github: "AviKav/silicon.ex"},
+      {:aws, "~> 0.13.0"},
+      {:finch, "~> 0.16"},
+
       # For backwards compatibility...
       {:phoenix_html_helpers, "~> 1.0.1"}
     ]
