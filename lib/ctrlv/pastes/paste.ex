@@ -11,10 +11,9 @@ defmodule Ctrlv.Pastes.Paste do
           id: String.t(),
           puid: String.t(),
           content_sha: String.t(),
-          content: [[String.t()]],
+          content: String.t(),
           language: atom(),
           expires_at: DateTime.t(),
-          expires_in: String.t() | nil,
           inserted_at: DateTime.t()
         }
 
@@ -27,6 +26,7 @@ defmodule Ctrlv.Pastes.Paste do
 
     field :expires_in, Ecto.Enum,
       values: ~w(10_minutes 1_hour 1_day 3_days 1_week 1_month)a,
+      redact: true,
       virtual: true
 
     timestamps(updated_at: false)

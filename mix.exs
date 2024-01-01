@@ -58,7 +58,7 @@ defmodule Ctrlv.MixProject do
       {:live_monaco_editor, "~> 0.1"},
 
       # Code images.
-      {:silicon, github: "AviKav/silicon.ex"},
+      {:silicon, github: "AviKav/silicon.ex", branch: "main"},
       {:aws, "~> 0.13.0"},
       {:finch, "~> 0.16"},
 
