@@ -13,6 +13,7 @@ defmodule Ctrlv.Pastes.Paste do
           content_sha: String.t(),
           content: String.t(),
           language: atom(),
+          image_path: String.t() | nil,
           expires_at: DateTime.t(),
           inserted_at: DateTime.t()
         }
@@ -23,6 +24,7 @@ defmodule Ctrlv.Pastes.Paste do
     field :content, :string
     field :language, Ecto.Enum, values: Language.list()
     field :expires_at, :utc_datetime
+    field :image_path, :string
 
     field :expires_in, Ecto.Enum,
       values: ~w(10_minutes 1_hour 1_day 3_days 1_week 1_month)a,
@@ -42,7 +44,7 @@ defmodule Ctrlv.Pastes.Paste do
   @doc false
   def changeset(paste, attrs) do
     paste
-    |> cast(attrs, [:content, :expires_in, :language], message: &cast_error_message/2)
+    |> cast(attrs, [:content, :expires_in, :language, :image_path], message: &cast_error_message/2)
     |> validate_length(:content, greater_than_or_equal_to: 1)
     |> validate_required([:expires_in, :language])
     |> put_expires_at()

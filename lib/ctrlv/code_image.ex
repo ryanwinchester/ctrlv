@@ -34,6 +34,14 @@ defmodule Ctrlv.CodeImage do
   """
   @spec upload(String.t(), binary()) :: {:ok, path :: String.t()} | {:error, term()}
   def upload(filename, image) do
-    S3.upload(filename, "image/png", image)
+    S3.upload_object(filename, "image/png", image)
+  end
+
+  @doc """
+  Get the URL for an image by it's path.
+  """
+  @spec url(String.t()) :: String.t()
+  def url(path) do
+    S3.get_object_url(path)
   end
 end

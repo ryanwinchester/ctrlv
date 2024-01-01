@@ -7,7 +7,10 @@ defmodule Ctrlv.Integrations.AWS.S3 do
 
   require Logger
 
-  def upload(filename, content_type, content) do
+  @doc """
+  Upload an object to S3.
+  """
+  def upload_object(filename, content_type, content) do
     client = Client.new()
     bucket = config!(:bucket)
     filename = Path.join("ctrlv-images", filename)
@@ -30,6 +33,15 @@ defmodule Ctrlv.Integrations.AWS.S3 do
         Logger.error("Error uploading: #{inspect(reason)}")
         {:error, reason}
     end
+  end
+
+  @doc """
+  Get the URL of an S3 object from the path (and config).
+  """
+  def get_object_url(path) do
+    bucket = config!(:bucket)
+    region = Application.fetch_env!(:ctrlv, Client) |> Keyword.fetch!(:region)
+    "https://#{bucket}.s3.#{region}.amazonaws.com/#{path}"
   end
 
   defp config!(key) do
