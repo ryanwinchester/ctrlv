@@ -12,8 +12,8 @@
 #   - https://pkgs.org/ - resource for finding needed packages
 #   - Ex: hexpm/elixir:1.13.3-erlang-24.2-debian-bullseye-20210902-slim
 #
-ARG ELIXIR_VERSION=1.15.7
-ARG OTP_VERSION=26.2
+ARG ELIXIR_VERSION=1.16.0
+ARG OTP_VERSION=26.2.1
 ARG DEBIAN_VERSION=buster-20231009-slim
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
@@ -24,6 +24,9 @@ FROM ${BUILDER_IMAGE} as builder
 # install build dependencies
 RUN apt-get update -y && apt-get install -y build-essential git \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
+
+# install cargo/rust
+RUN curl https://sh.rustup.rs -sSf | sh
 
 # prepare build dir
 WORKDIR /app
