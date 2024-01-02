@@ -25,8 +25,8 @@ FROM ${RUST_IMAGE} as rust
 FROM ${BUILDER_IMAGE} as builder
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git \
-    && apt-get clean && rm -f /var/lib/apt/lists/*_*
+RUN apt-get update -y && apt-get install -y build-essential git
+    # && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # rust shenanigans
 ENV RUSTUP_HOME=/usr/local/rustup \
@@ -36,8 +36,8 @@ COPY --from=rust /usr/local/cargo /usr/local/cargo
 COPY --from=rust /usr/local/rustup /usr/local/rustup
 
 # rustler/python3 dependencies
-RUN apt-get update -y && apt-get install -y make cmake pkg-config fontconfig \
-    && apt-get clean && rm -f /var/lib/apt/lists/*_*
+RUN apt-get update -y && apt-get install -y make cmake pkg-config libfontconfig1-dev
+    # && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # install python3 for rustler
 RUN apt-get update -y && apt-get install -y libssl-dev libffi-dev python3-dev \
@@ -83,7 +83,11 @@ RUN mix release
 # the compiled release and other runtime necessities
 FROM ${RUNNER_IMAGE}
 
-RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales fonts-firacode \
+RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales
+  # && apt-get clean && rm -f /var/lib/apt/lists/*_*
+
+# rustler stuff needed in runner image
+RUN apt-get update -y && apt-get install -y libfontconfig1-dev fonts-firacode \
   && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Set the locale
