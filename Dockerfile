@@ -36,7 +36,9 @@ COPY --from=rust /usr/local/cargo /usr/local/cargo
 COPY --from=rust /usr/local/rustup /usr/local/rustup
 
 # rustler/python3 dependencies
-RUN apt-get update -y && apt-get install -y make cmake pkg-config libfontconfig1-dev
+RUN apt-get update -y && apt-get install -y expat libxml2-dev pkg-config \
+    libfontconfig1-dev libasound2-dev libssl-dev cmake libfreetype6-dev \
+    libexpat1-dev libxcb-composite0-dev libharfbuzz-dev
     # && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # install python3 for rustler
@@ -87,7 +89,9 @@ RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 local
   # && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # rustler stuff needed in runner image
-RUN apt-get update -y && apt-get install -y libfontconfig1-dev fonts-firacode \
+RUN apt-get update -y && apt-get install -y expat libxml2-dev pkg-config \
+    libfontconfig1-dev libasound2-dev libssl-dev cmake libfreetype6-dev \
+    libexpat1-dev libxcb-composite0-dev libharfbuzz-dev fonts-firacode \
   && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Set the locale
