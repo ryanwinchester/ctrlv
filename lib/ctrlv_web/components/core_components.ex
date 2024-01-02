@@ -4,6 +4,18 @@ defmodule CtrlvWeb.CoreComponents do
   """
   use Phoenix.Component
 
+  attr :paste, Ctrlv.Pastes.Paste, default: nil
+
+  def og_image(assigns) do
+    ~H"""
+    <meta
+      :if={@paste && @paste.image_path}
+      property="og:image"
+      content={Ctrlv.CodeImage.url(@paste.image_path)}
+    />
+    """
+  end
+
   # import CtrlvWeb.Gettext
 
   # alias Phoenix.LiveView.JS

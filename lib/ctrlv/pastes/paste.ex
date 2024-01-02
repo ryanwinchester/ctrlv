@@ -44,7 +44,9 @@ defmodule Ctrlv.Pastes.Paste do
   @doc false
   def changeset(paste, attrs) do
     paste
-    |> cast(attrs, [:content, :expires_in, :language, :image_path], message: &cast_error_message/2)
+    |> cast(attrs, [:content, :expires_in, :language, :image_path],
+      message: &cast_error_message/2
+    )
     |> validate_length(:content, greater_than_or_equal_to: 1)
     |> validate_required([:expires_in, :language])
     |> put_expires_at()

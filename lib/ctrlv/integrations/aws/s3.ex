@@ -13,7 +13,6 @@ defmodule Ctrlv.Integrations.AWS.S3 do
   def upload_object(filename, content_type, content) do
     client = Client.new()
     bucket = config!(:bucket)
-    filename = Path.join("ctrlv-images", filename)
 
     body = %{
       "Body" => content,

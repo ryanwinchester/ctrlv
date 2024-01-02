@@ -94,7 +94,7 @@ defmodule Ctrlv.Pastes do
     Repo.transact(fn ->
       with {:ok, paste} <- Repo.insert(changeset),
            image <- CodeImage.from_paste(paste),
-           {:ok, path} <- CodeImage.upload(paste.pid, image) do
+           {:ok, path} <- CodeImage.upload(paste.puid <> ".png", image) do
         update_paste(paste, %{image_path: path})
       end
     end)

@@ -11,7 +11,7 @@ defmodule Ctrlv.CodeImage do
   """
   @spec from_paste(Paste.t()) :: binary()
   def from_paste(%Paste{content: code, language: language}) do
-    generate(code, language)
+    generate(code, to_string(language))
   end
 
   @doc """
@@ -19,12 +19,21 @@ defmodule Ctrlv.CodeImage do
   """
   @spec generate(String.t(), String.t()) :: binary()
   def generate(code, language) do
-    Silicon.Native.nif_format(
+    Silicon.Native.format_png(
       code,
-      %Silicon.FormatOptions{
+      %Silicon.Options.Format{
         lang: language,
         theme: "TwoDark",
-        image_options: %Silicon.ImageOptions{}
+        image_options: %Silicon.Options.Image{
+          font: [
+            {"Fira Code", 26.0},
+            {"Hack", 26.0}
+          ],
+          line_pad: 2,
+          line_number: true,
+          window_controls: true,
+          line_offset: 1
+        }
       }
     )
   end
@@ -34,7 +43,9 @@ defmodule Ctrlv.CodeImage do
   """
   @spec upload(String.t(), binary()) :: {:ok, path :: String.t()} | {:error, term()}
   def upload(filename, image) do
-    S3.upload_object(filename, "image/png", image)
+    "ctrlv-images"
+    |> Path.join(filename)
+    |> S3.upload_object("image/png", image)
   end
 
   @doc """

@@ -4,6 +4,13 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%!-- <meta property="og:url" content="http://bits.blogs.nytimes.com/2011/12/08/a-twitter-for-my-sister/" /> --%>
+    <meta property="og:title" content={assigns[:page_title] || "Ctrlv"} />
+    <meta
+      property="og:description"
+      content="A simply beautiful code pastebin and editor for sharing code snippets."
+    />
+    <.og_image paste={assigns[:paste]} />
     <link rel="icon" href="/favicon.svg" />
     <link rel="mask-icon" href="/favicon.svg" color="#4f46e5" />
     <%= csrf_meta_tag() %>

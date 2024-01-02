@@ -75,6 +75,5 @@ if config_env() == :prod do
     secret_access_key: System.fetch_env!("AWS_SECRET_ACCESS_KEY"),
     region: System.get_env("AWS_REGION", "us-east-1")
 
-  config :ctrlv, Ctrlv.Integrations.AWS.S3,
-    bucket: System.fetch_env!("AWS_BUCKET")
+  config :ctrlv, Ctrlv.Integrations.AWS.S3, bucket: System.fetch_env!("AWS_BUCKET")
 end

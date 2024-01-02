@@ -5,5 +5,4 @@ config :ctrlv, Ctrlv.Integrations.AWS.Client,
   secret_access_key: "",
   region: ""
 
-config :ctrlv, Ctrlv.Integrations.AWS.S3,
-  bucket: ""
+config :ctrlv, Ctrlv.Integrations.AWS.S3, bucket: ""
