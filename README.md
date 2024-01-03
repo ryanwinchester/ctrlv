@@ -4,6 +4,26 @@ Code paste-bin and editor.
 
 ![ctrlv-02](https://user-images.githubusercontent.com/2897340/160538360-cab5957d-263d-4348-97af-bc9708087ffb.gif)
 
+## Features
+
+- [x] Simple and clean UI
+- [x] Editor with syntax highlighting
+- [x] Saving with expiration
+- [x] Forking
+- [ ] Editor plugins (in progress, see below)
+- [ ] Code screenshots (in progress)
+- [ ] CLI tool (planned)
+- [x] Works on mobile (see image below)
+- [ ] User accounts (planned)
+  - [ ] Non-expiring
+  - [ ] Delete
+
+#### Mobile view
+
+<div align="center">
+  <img alt="ctrlv mobile" height="480" src="/priv/static/images/mobile.png" />
+</div>
+
 ## Editor plugins
 
 - [VS Code](https://marketplace.visualstudio.com/items?itemName=ryanwinchester.ctrlv)
@@ -34,8 +54,8 @@ Use the `Dockerfile` to build an image and deploy it.
 - [x] Save
 - [x] Fork
 - [x] New
-- [x] CodeMirror 6 languages
-- [x] CodeMirror Legacy languages
+- [x] ~~CodeMirror 6 languages~~
+- [x] ~~CodeMirror Legacy languages~~
 - [x] Elixir language
 - [x] Limit content length
 - [ ] Cache
@@ -62,7 +82,7 @@ Use the `Dockerfile` to build an image and deploy it.
 
 #### v3.0 (potential ideas/wishlist for now)
 
-- [ ] User accounts for non-expiring pastes
+- [ ] User accounts for non-expiring, and deletable pastes
 
 ## About
 
