@@ -18,6 +18,7 @@ kill_timeout = 5
   http_checks = []
   internal_port = 4000
   protocol = "tcp"
+  min_machines_running = 1
 
   [services.concurrency]
     hard_limit = 25

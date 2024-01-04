@@ -7,6 +7,7 @@ defmodule Ctrlv.Pastes do
 
   alias Ecto.Changeset
 
+  alias Ctrlv.CodeImage
   alias Ctrlv.Pastes.Paste
   alias Ctrlv.Repo
 
@@ -90,13 +91,19 @@ defmodule Ctrlv.Pastes do
 
   """
   def create_paste(%Changeset{} = changeset) do
-    Repo.insert(changeset)
+    Repo.transact(fn ->
+      with {:ok, paste} <- Repo.insert(changeset),
+           image <- CodeImage.from_paste(paste),
+           {:ok, path} <- CodeImage.upload(paste.puid <> ".png", image) do
+        update_paste(paste, %{image_path: path})
+      end
+    end)
   end
 
   def create_paste(attrs) do
     %Paste{}
     |> Paste.changeset(attrs)
-    |> Repo.insert()
+    |> create_paste()
   end
 
   @doc """

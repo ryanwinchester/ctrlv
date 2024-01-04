@@ -17,7 +17,8 @@ defmodule Ctrlv.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Ctrlv.PubSub},
       # Start the Endpoint (http/https)
-      CtrlvWeb.Endpoint
+      CtrlvWeb.Endpoint,
+      {Finch, name: Ctrlv.Finch}
       # Start a worker by calling: Ctrlv.Worker.start_link(arg)
       # {Ctrlv.Worker, arg}
       | schedules()
