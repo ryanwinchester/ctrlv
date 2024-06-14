@@ -8,6 +8,7 @@ defmodule Ctrlv.Repo.Migrations.CreatePastes do
       add :content, :text, null: false
       add :language, :string, null: false
       add :expires_at, :utc_datetime
+      add :image_path, :string
       timestamps(updated_at: false)
     end
 

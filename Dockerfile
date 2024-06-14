@@ -12,17 +12,37 @@
 #   - https://pkgs.org/ - resource for finding needed packages
 #   - Ex: hexpm/elixir:1.13.3-erlang-24.2-debian-bullseye-20210902-slim
 #
-ARG ELIXIR_VERSION=1.15.7
-ARG OTP_VERSION=26.2
+ARG ELIXIR_VERSION=1.16.0
+ARG OTP_VERSION=26.2.1
 ARG DEBIAN_VERSION=buster-20231009-slim
 
+ARG RUST_IMAGE="rust:slim-buster"
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
+
+FROM ${RUST_IMAGE} as rust
 
 FROM ${BUILDER_IMAGE} as builder
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git \
+RUN apt-get update -y && apt-get install -y build-essential git
+    # && apt-get clean && rm -f /var/lib/apt/lists/*_*
+
+# rust shenanigans
+ENV RUSTUP_HOME=/usr/local/rustup \
+    CARGO_HOME=/usr/local/cargo \
+    PATH=/usr/local/cargo/bin:$PATH
+COPY --from=rust /usr/local/cargo /usr/local/cargo
+COPY --from=rust /usr/local/rustup /usr/local/rustup
+
+# rustler/python3 dependencies
+RUN apt-get update -y && apt-get install -y expat libxml2-dev pkg-config \
+    libfontconfig1-dev libasound2-dev libssl-dev cmake libfreetype6-dev \
+    libexpat1-dev libxcb-composite0-dev libharfbuzz-dev
+    # && apt-get clean && rm -f /var/lib/apt/lists/*_*
+
+# install python3 for rustler
+RUN apt-get update -y && apt-get install -y libssl-dev libffi-dev python3-dev \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # prepare build dir
@@ -65,7 +85,13 @@ RUN mix release
 # the compiled release and other runtime necessities
 FROM ${RUNNER_IMAGE}
 
-RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
+RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales
+  # && apt-get clean && rm -f /var/lib/apt/lists/*_*
+
+# rustler stuff needed in runner image
+RUN apt-get update -y && apt-get install -y expat libxml2-dev pkg-config \
+    libfontconfig1-dev libasound2-dev libssl-dev cmake libfreetype6-dev \
+    libexpat1-dev libxcb-composite0-dev libharfbuzz-dev fonts-firacode \
   && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Set the locale
